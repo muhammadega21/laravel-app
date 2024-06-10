@@ -18,11 +18,14 @@ return new class extends Migration
     {
         Schema::create('pengembalian', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Pengembalian::class)->constrained();
-            $table->foreignIdFor(Siswa::class)->constrained();
-            $table->foreignIdFor(Petugas::class)->constrained();
-            $table->foreignIdFor(Buku::class)->constrained();
-            $table->foreignIdFor(Denda::class)->constrained();
+            $table->unsignedBigInteger('siswa_id');
+            $table->unsignedBigInteger('petugas_id');
+            $table->unsignedBigInteger('buku_id');
+            $table->unsignedBigInteger('denda_id');
+            $table->foreign('siswa_id')->references('id')->on('siswa')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('petugas_id')->references('id')->on('petugas')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('buku_id')->references('id')->on('buku')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('denda_id')->references('id')->on('denda')->onDelete('cascade')->onUpdate('cascade');
             $table->date('tgl_kembali');
             $table->timestamps();
         });

@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('petugas', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained();
-            $table->foreignIdFor(Petugas::class)->constrained();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade')->onUpdate('cascade');
             $table->char('id_petugas');
             $table->string('email');
             $table->string('name');

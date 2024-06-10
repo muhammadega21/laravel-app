@@ -16,9 +16,12 @@ return new class extends Migration
     {
         Schema::create('peminjaman', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Siswa::class)->constrained();
-            $table->foreignIdFor(Petugas::class)->constrained();
-            $table->foreignIdFor(Buku::class)->constrained();
+            $table->unsignedBigInteger('siswa_id');
+            $table->unsignedBigInteger('petugas_id');
+            $table->unsignedBigInteger('buku_id');
+            $table->foreign('siswa_id')->references('id')->on('siswa')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('petugas_id')->references('id')->on('petugas')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('buku_id')->references('id')->on('buku')->onDelete('cascade')->onUpdate('cascade');
             $table->date('tgl_pinjam');
             $table->date('tgl_kembali');
             $table->timestamps();

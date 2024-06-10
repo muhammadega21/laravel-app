@@ -16,9 +16,12 @@ return new class extends Migration
     {
         Schema::create('buku', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Pengarang::class)->constrained();
-            $table->foreignIdFor(Penerbit::class)->constrained();
-            $table->foreignIdFor(Rak::class)->constrained();
+            $table->unsignedBigInteger('pengarang_id');
+            $table->unsignedBigInteger('penerbit_id');
+            $table->unsignedBigInteger('rak_id');
+            $table->foreign('pengarang_id')->references('id')->on('pengarang')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('penerbit_id')->references('id')->on('penerbit')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('rak_id')->references('id')->on('rak')->onDelete('cascade')->onUpdate('cascade');
             $table->string('judul');
             $table->integer('tahun_terbit');
             $table->integer('jumlah');

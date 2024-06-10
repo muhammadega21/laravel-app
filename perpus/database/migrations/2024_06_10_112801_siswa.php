@@ -16,8 +16,10 @@ return new class extends Migration
     {
         Schema::create('siswa', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained();
-            $table->foreignIdFor(Kelas::class)->constrained();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('kelas_id');
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade')->onUpdate('cascade');
             $table->char('id_siswa');
             $table->string('email');
             $table->string('name');
