@@ -2,7 +2,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex gap-2 align-items-center">
+        <a href="{{ url('/') }}" class="logo d-flex gap-2 align-items-center">
             <span class="d-none d-lg-block">Perpus Sekolah</span>
             <img src="{{ asset('img/logo.png?v=' . time()) }}" alt="">
         </a>
