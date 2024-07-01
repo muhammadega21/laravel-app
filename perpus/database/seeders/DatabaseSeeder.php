@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Petugas;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,9 +16,17 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $user = User::create([
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('admin'),
+            'role' => 1
+        ]);
+
+        Petugas::create([
+            'id_petugas' => 'P001',
+            'user_id' => $user->id,
+            'username' => 'Admin',
+            'name' => 'Administrator',
         ]);
     }
 }

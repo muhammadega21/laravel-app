@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Petugas extends Model
 {
     use HasFactory;
-    protected $table = 'petugas';
     protected $guarded = ['id'];
+    protected $with = ['user'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

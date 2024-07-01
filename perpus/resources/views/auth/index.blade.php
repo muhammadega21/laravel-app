@@ -29,6 +29,11 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('css/style.css?v=' . time()) }}" rel="stylesheet">
+
+    {{-- CDN --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+        integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
@@ -58,23 +63,33 @@
                                         <p class="text-center small">Masukkan username dan password</p>
                                     </div>
 
-                                    <form class="row g-3 needs-validation" novalidate>
+                                    <form class="row g-3" action="{{ url('/login') }}" method="POST">
+                                        @csrf
 
                                         <div class="col-12">
-                                            <label for="yourUsername" class="form-label">Username</label>
+                                            <label for="yourUsername" class="form-label">Email</label>
                                             <div class="input-group has-validation">
-                                                <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                <input type="text" name="username" class="form-control"
-                                                    id="yourUsername" required>
-                                                <div class="invalid-feedback">Please enter your username.</div>
+                                                <input type="text" name="email"
+                                                    class="form-control @error('email') is-invalid @enderror"
+                                                    id="youremail">
+                                                @error('email')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
 
                                         <div class="col-12">
                                             <label for="yourPassword" class="form-label">Password</label>
-                                            <input type="password" name="password" class="form-control"
-                                                id="yourPassword" required>
-                                            <div class="invalid-feedback">Please enter your password!</div>
+                                            <input type="password" name="password"
+                                                class="form-control @error('password') is-invalid @enderror"
+                                                id="yourPassword">
+                                            @error('password')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
 
                                         <div class="col-12">
@@ -100,6 +115,24 @@
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
+
+    @if (Session::has('success'))
+        <script>
+            swal("Success!", "{{ Session::get('success') }}", "success"), {
+                button: true,
+                button: 'ok'
+            }
+        </script>
+    @elseif (Session::has('error'))
+        <script>
+            swal("Error!", "{{ Session::get('error') }}", "error"), {
+                button: true,
+                button: 'ok'
+            }
+        </script>
+    @endif
+
+
 
     <!-- Vendor JS Files -->
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

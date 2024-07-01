@@ -58,36 +58,64 @@
                                         <p class="text-center small">Masukkan data pribadi anda</p>
                                     </div>
 
-                                    <form class="row g-3 needs-validation" novalidate>
+                                    <form class="row g-3" action="{{ url('register') }}" method="POST">
+                                        @csrf
                                         <div class="col-12">
                                             <label for="yourName" class="form-label">Nama</label>
-                                            <input type="text" name="name" class="form-control" id="yourName"
-                                                required>
-                                            <div class="invalid-feedback">Nama tidak boleh kosong</div>
+                                            <input type="text" name="name"
+                                                class="form-control @error('name') is-invalid @enderror"
+                                                value="{{ old('name') }}" id="yourName">
+                                            @error('name')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="yourEmail" class="form-label">Email</label>
+                                            <input type="email" name="email"
+                                                class="form-control @error('email') is-invalid @enderror"
+                                                value="{{ old('email') }}" id="yourEmail">
+                                            @error('email')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
 
                                         <div class="col-12">
                                             <label for="yourUsername" class="form-label">Username</label>
                                             <div class="input-group has-validation">
-                                                <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                <input type="text" name="username" class="form-control"
-                                                    id="yourUsername" required>
-                                                <div class="invalid-feedback">Username tidak boleh kosong</div>
+                                                <input type="text" name="username"
+                                                    class="form-control @error('username') is-invalid @enderror"
+                                                    value="{{ old('username') }}" id="yourUsername">
+                                                @error('username')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
 
                                         <div class="col-12">
                                             <label for="yourPassword" class="form-label">Password</label>
-                                            <input type="password" name="password" class="form-control"
-                                                id="yourPassword" required>
-                                            <div class="invalid-feedback">Password tidak boleh kosong</div>
+                                            <input type="password" name="password"
+                                                class="form-control @error('password') is-invalid @enderror"
+                                                id="yourPassword">
+                                            @error('password')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
 
                                         <div class="col-12">
                                             <button class="btn btn-primary w-100" type="submit">Daftar</button>
                                         </div>
                                         <div class="col-12 text-center">
-                                            <p class="small mb-0">Sudah memiliki akun? <a href="{{ url('/login') }}">Log
+                                            <p class="small mb-0">Sudah memiliki akun? <a
+                                                    href="{{ url('/login') }}">Log
                                                     in</a></p>
                                         </div>
                                     </form>

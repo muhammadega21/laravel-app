@@ -12,11 +12,15 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('/login', 'login');
     Route::get('/logout', 'logout')->middleware('auth');
     Route::get('/register', 'register')->middleware('guest');
-    Route::post('/register', 'registerStore');
+    Route::post('/register', 'registerStore')->name('registerStore');
 });
+
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/dashboard', 'index')->middleware('auth')->name('dashboard');
 });
 
+// Petugas
 Route::resource('petugas', PetugasController::class)->middleware('auth');
+Route::get('petugas/delete/{id_petugas}', [PetugasController::class, 'destroy'])->middleware('auth');
+Route::post('petugas/update/{id_petugas}', [PetugasController::class, 'update'])->middleware('auth');

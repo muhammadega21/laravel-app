@@ -8,6 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Denda extends Model
 {
     use HasFactory;
-    protected $table = "Denda";
     protected $guarded = ['id'];
 }

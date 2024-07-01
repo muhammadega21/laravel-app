@@ -1,4 +1,5 @@
 <x-layouts.main :title="$title" :mainPage="$main_page" :page="$page">
+
     <x-card cardTitle='Siswa' icon='bi-person'>300</x-card>
     <x-card cardTitle='Petugas' icon='bi-person-badge'>5</x-card>
     <x-card cardTitle='Kelas' icon='bi-house'>8</x-card>
@@ -55,4 +56,11 @@
 
         </div>
     </div><!-- End Reports -->
+
+    @if (Session::has('success'))
+        <script>
+            toastr.success("{{ Session::get('success') }}");
+        </script>
+    @endif
+
 </x-layouts.main>
