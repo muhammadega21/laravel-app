@@ -350,8 +350,8 @@ function confirm(e) {
     const url = e.currentTarget.getAttribute("href");
 
     swal({
-        title: "Are You Sure?",
-        text: "This delete will be premanent",
+        title: "Anda Yakin?",
+        text: "Data ini akan dihapus permanent",
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -363,13 +363,29 @@ function confirm(e) {
 }
 
 $("#updatePetugas").on("show.bs.modal", function (event) {
-    var button = $(event.relatedTarget);
-    var petugas = button.data("petugas");
-    var idPetugas = petugas.id_petugas;
+    const button = $(event.relatedTarget);
+    const petugas = button.data("petugas");
+    const idPetugas = petugas.id_petugas;
 
     $("#updatePetugas form").attr("action", "petugas/update/" + idPetugas);
 
     $("#name").val(petugas.name);
     $("#username").val(petugas.username);
     $("#email").val(petugas.user.email);
+});
+
+$("#updateSiswa").on("show.bs.modal", function (event) {
+    const button = $(event.relatedTarget);
+    const siswa = button.data("siswa");
+    const idSiswa = siswa.id_siswa;
+
+    $("#updateSiswa form").attr("action", "siswa/update/" + idSiswa);
+
+    $("#name").val(siswa.name);
+    $("#username").val(siswa.username);
+    $("#email").val(siswa.user.email);
+    $("#nis").val(siswa.nis);
+
+    // Set the selected kelas option
+    $("#kelas_id").val(siswa.kelas_id);
 });

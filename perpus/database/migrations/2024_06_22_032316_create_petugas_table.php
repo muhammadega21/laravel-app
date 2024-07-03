@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->char('id_petugas');
-            $table->string('username');
-            $table->string('name');
-            $table->char('no_telp')->nullable();
+            $table->char('id_petugas', 4);
+            $table->string('name', 30);
+            $table->string('username', 15);
+            $table->char('no_telp', 15)->nullable();
             $table->boolean('jenis_kelamin')->nullable();
             $table->text('alamat')->nullable();
-            $table->string('image')->default('user.png');
+            $table->string('image', 50)->default('user.png');
             $table->timestamps();
         });
     }

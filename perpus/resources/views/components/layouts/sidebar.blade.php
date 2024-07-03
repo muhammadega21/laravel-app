@@ -14,26 +14,33 @@
         <li class="nav-heading">Pages</li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#master-data" data-bs-toggle="collapse" href="#">
+            <a class="nav-link  {{ Request::is(['petugas', 'siswa', 'kelas']) ? 'active' : 'collapsed' }}"
+                data-bs-target="#master-data" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-menu-button-wide"></i><span>Master Data</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="master-data" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <ul id="master-data"
+                class="nav-content collapse {{ Request::is(['petugas', 'siswa', 'kelas']) ? 'show' : '' }}"
+                data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ url('petugas') }}">
+                    <a href="{{ url('petugas') }}" class="{{ Request::is('petugas') ? 'active' : '' }}">
                         <i class="bi bi-circle"></i><span>Data Petugas</span>
                     </a>
                 </li>
             </ul>
-            <ul id="master-data" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <ul id="master-data"
+                class="nav-content collapse {{ Request::is(['petugas', 'siswa', 'kelas']) ? 'show' : '' }}"
+                data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="components-alerts.html">
+                    <a href="{{ url('siswa') }}" class="{{ Request::is('siswa') ? 'active' : '' }}">
                         <i class="bi bi-circle"></i><span>Data Siswa</span>
                     </a>
                 </li>
             </ul>
-            <ul id="master-data" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <ul id="master-data"
+                class="nav-content collapse {{ Request::is(['petugas', 'siswa', 'kelas']) ? 'show' : '' }}"
+                data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="components-alerts.html">
+                    <a href="components-alerts.html" class="{{ Request::is('kelas') ? 'active' : '' }}">
                         <i class="bi bi-circle"></i><span>Data Kelas</span>
                     </a>
                 </li>

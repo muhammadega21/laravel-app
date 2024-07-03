@@ -16,9 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('siswa_id');
             $table->unsignedBigInteger('petugas_id');
             $table->unsignedBigInteger('buku_id');
-            $table->foreign('siswa_id')->references('id')->on('siswas')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('petugas_id')->references('id')->on('petugas')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('buku_id')->references('id')->on('bukus')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('siswa_id')->references('id')->on('siswas');
+            $table->foreign('petugas_id')->references('id')->on('petugas');
+            $table->foreign('buku_id')->references('id')->on('bukus');
             $table->date('tgl_pinjam');
             $table->date('tgl_kembali');
             $table->timestamps();

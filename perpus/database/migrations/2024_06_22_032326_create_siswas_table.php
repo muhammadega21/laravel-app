@@ -16,14 +16,15 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('kelas_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade')->onUpdate('cascade');
-            $table->char('id_siswa')->nullable();
-            $table->string('username');
-            $table->string('name');
-            $table->char('no_telp')->nullable();
+            $table->foreign('kelas_id')->references('id')->on('kelas');
+            $table->char('id_siswa', 4)->nullable();
+            $table->string('name', 30);
+            $table->string('username', 15);
+            $table->string('nis', 10)->nullable();
+            $table->char('no_telp', 15)->nullable();
             $table->boolean('jenis_kelamin')->nullable();
             $table->text('alamat')->nullable();
-            $table->string('image')->default('user.png');
+            $table->string('image', 50)->default('user.png');
             $table->timestamps();
         });
     }

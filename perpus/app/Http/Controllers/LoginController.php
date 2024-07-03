@@ -25,7 +25,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             Auth::user()->role == 3 ? $name = Auth::user()->siswa->name : $name = Auth::user()->petugas->name;
-            return redirect()->intended('/dashboard')->with('success', 'Selamat Datang ' . $name);
+            return redirect()->intended('/dashboard')->with('toastSuccess', 'Selamat Datang ' . $name);
         }
 
         return back()->with('error', 'Email atau Password Salah');

@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Petugas;
+use App\Models\Kelas;
+use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Validator as ValidationValidator;
 
-class PetugasController extends Controller
+class SiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('petugas.index', [
-            'title' => "Petugas",
+        return view('siswa.index', [
+            'title' => "Siswa",
             'main_page' => 'Master',
-            'page' => 'Petugas',
-            'datas' => Petugas::all()
+            'page' => 'Siswa',
+            'datas' => Siswa::all(),
+            'kelas' => Kelas::all()
         ]);
     }
 
@@ -41,6 +42,8 @@ class PetugasController extends Controller
             'email' => 'required|email:dns|unique:users,email',
             'username' => 'required|max:8',
             'password' => 'required|min:4',
+            'kelas_id' => 'required',
+            'nis' => 'required|max:10|unique:siswas,nis'
         ], [
 
             'name.required' => 'Nama Tidak Boleh Kosong!',
@@ -57,37 +60,43 @@ class PetugasController extends Controller
             'password.required' => 'Password Tidak Boleh Kosong!',
             'password.min' => 'Password Minimal 4 Karakter!',
 
+            'kelas_id.required' => 'Kelas Tidak Boleh Kosong!',
+
+            'nis.required' => 'NIS Tidak Boleh Kosong!',
+            'nis.max' => 'Max 10 Karakter!',
+            'nis.unique' => 'NIS Sudah Ada!'
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput()->with('addPetugas', 'Gagal Menambah Petugas');
+            return redirect()->back()->withErrors($validator)->withInput()->with('addSiswa', 'Gagal Menambah Siswa');
         }
 
         // id_siswa
-        $lastId = Petugas::latest('id_petugas')->first();
-        $nextId = $lastId ? substr($lastId->id_petugas, 1) + 1 : 1;
-        $idSiswa = 'P' . str_pad($nextId, 3, '0', STR_PAD_LEFT);
+        $lastId = Siswa::latest('id_siswa')->first();
+        $nextId = $lastId ? substr($lastId->id_siswa, 1) + 1 : 1;
+        $idSiswa = 'S' . str_pad($nextId, 3, '0', STR_PAD_LEFT);
 
         $user = User::create([
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
-            'role' => 2
         ]);
 
-        Petugas::create([
-            'id_petugas' => $idSiswa,
+        Siswa::create([
+            'id_siswa' => $idSiswa,
             'user_id' => $user->id,
             'username' => $request->input('username'),
             'name' => $request->input('name'),
+            'kelas_id' => $request->input('kelas_id'),
+            'nis' => $request->input('nis')
         ]);
 
-        return redirect('/petugas')->with('success', 'Berhasil menambah petugas');
+        return redirect('/siswa')->with('success', 'Berhasil menambah Siswa');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Siswa $siswa)
     {
         //
     }
@@ -95,7 +104,7 @@ class PetugasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Siswa $siswa)
     {
         //
     }
@@ -105,28 +114,47 @@ class PetugasController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validator = Validator::make($request->all(), [
+        $data = Siswa::where('id_siswa', $id)->first();
+
+        $rules = [
             'name' => 'required|max:30',
             'username' => 'required|max:8',
-        ], [
+            'kelas_id' => 'required',
+        ];
+
+        if ($request->nis != $data->nis) {
+            $rules['nis'] = 'required|max:10|unique:siswas,nis';
+        }
+
+        $validator = Validator::make($request->all(), $rules, [
             'name.required' => 'Nama Tidak Boleh Kosong!',
             'name.unique' => 'Nama Sudah Ada!',
             'name.max' => 'Max 30 Karakter!',
 
             'username.required' => 'Username Tidak Boleh Kosong!',
             'username.max' => 'Username Maksimal 8 Karakter!',
+
+            'kelas_id.required' => 'Kelas Tidak Boleh Kosong!',
+
+            'nis.required' => 'NIS Tidak Boleh Kosong!',
+            'nis.max' => 'Max 10 Karakter!',
+            'nis.unique' => 'NIS Sudah Ada!'
         ]);
+
+
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput()->with('updatePetugas', 'Gagal Update Petugas');
+            return redirect()->back()->withErrors($validator)->withInput()->with('updateSiswa', 'Gagal Update Siswa');
         }
 
-        Petugas::where('id_petugas', $id)->update([
+        Siswa::where('id_siswa', $id)->update([
             'username' => $request->input('username'),
             'name' => $request->input('name'),
+            'kelas_id' => $request->input('kelas_id'),
+            'nis' => $request->input('nis'),
         ]);
 
-        return redirect('/petugas')->with('success', 'Berhasil update petugas');
+        return redirect('/siswa')->with('success', 'Berhasil update siswa');
     }
 
     /**
@@ -134,8 +162,8 @@ class PetugasController extends Controller
      */
     public function destroy(string $id)
     {
-        $petugas = Petugas::where('id_petugas', $id)->first();
-        User::destroy($petugas->user->id);
-        return redirect('/petugas')->with('success', 'Berhasil menghapus data');
+        $siswa = Siswa::where('id_siswa', $id)->first();
+        User::destroy($siswa->user->id);
+        return redirect('/siswa')->with('success', 'Berhasil menghapus data');
     }
 }

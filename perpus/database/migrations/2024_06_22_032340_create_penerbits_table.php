@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('penerbits', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('nama', 20);
             $table->text('alamat');
             $table->char('no_telp', 15);
             $table->timestamps();

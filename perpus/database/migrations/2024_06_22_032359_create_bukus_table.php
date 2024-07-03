@@ -16,13 +16,13 @@ return new class extends Migration
             $table->unsignedBigInteger('pengarang_id');
             $table->unsignedBigInteger('penerbit_id');
             $table->unsignedBigInteger('rak_id');
-            $table->foreign('pengarang_id')->references('id')->on('pengarangs')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('penerbit_id')->references('id')->on('penerbits')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('rak_id')->references('id')->on('raks')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('judul');
+            $table->foreign('pengarang_id')->references('id')->on('pengarangs');
+            $table->foreign('penerbit_id')->references('id')->on('penerbits');
+            $table->foreign('rak_id')->references('id')->on('raks');
+            $table->string('judul', 30);
             $table->integer('tahun_terbit');
             $table->integer('jumlah');
-            $table->string('isbn');
+            $table->string('isbn', 15);
             $table->timestamps();
         });
     }

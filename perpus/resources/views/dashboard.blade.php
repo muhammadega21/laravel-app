@@ -57,9 +57,9 @@
         </div>
     </div><!-- End Reports -->
 
-    @if (Session::has('success'))
+    @if (Session::has('toastSuccess'))
         <script>
-            toastr.success("{{ Session::get('success') }}");
+            toastr.success("{{ Session::get('toastSuccess') }}");
         </script>
     @endif
 
