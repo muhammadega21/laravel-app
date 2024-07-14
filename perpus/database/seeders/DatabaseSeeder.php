@@ -2,8 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Buku;
 use App\Models\Kelas;
+use App\Models\Penerbit;
+use App\Models\Pengarang;
 use App\Models\Petugas;
+use App\Models\Rak;
 use App\Models\Siswa;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -48,6 +52,26 @@ class DatabaseSeeder extends Seeder
             'name' => 'Muhammad Ega Dermawan',
             'nis' => '111',
             'kelas_id' => 1
+        ]);
+
+        Rak::create([
+            'id_rak' => 'R001',
+            'nama_rak' => 'Pengetahuan',
+            'keterangan' => 'Berisi buku pelajaran kelas XI - XII'
+        ]);
+
+        Buku::create([
+            'rak_id' => 1,
+            'judul' => 'Pendidikan Agama Islam SMA kelas XI',
+            'slug' => 'pendidikan-agama-islam-sma-kelas-xi',
+            'pengarang' => 'Sadi, H.M.Nasikin, A.Ilyas Ismail',
+            'penerbit' => 'Erlangga',
+            'tahun_terbit' => '2015',
+            'tempat_terbit' => 'Jakarta',
+            'jumlah' => 70,
+            'bahasa' => 'Indonesia',
+            'halaman' => '150',
+            'isbn' => '9786022415602'
         ]);
     }
 }

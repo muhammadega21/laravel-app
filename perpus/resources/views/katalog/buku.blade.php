@@ -1,0 +1,168 @@
+<x-layouts.main :title="$title" :mainPage="$main_page" :page="$page">
+    <div class="row">
+        <div class="col-lg">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h5 class="card-title">Data Buku</h5>
+                        <div class="btn-action">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#addBuku">
+                                Tambah <span class="fw-semibold">+</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="table datatable">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Judul</th>
+                                    <th class="text-nowrap">ISBN/ISSN</th>
+                                    <th class="text-nowrap">ID Rak</th>
+                                    <th class="text-nowrap">Nama Rak</th>
+                                    <th class="text-nowrap">Jumlah</th>
+                                    <th data-sortable="false">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($datas as $data)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $data->judul }}</td>
+                                        <td class="text-nowrap">{{ $data->isbn }}</td>
+                                        <td class="text-nowrap">{{ $data->rak->id_rak }}</td>
+                                        <td class="text-nowrap">{{ $data->rak->nama_rak }}</td>
+                                        <td class="text-nowrap">{{ $data->jumlah }}</td>
+                                        <td class="text-nowrap">
+                                            <div class="d-flex gap-1">
+                                                <a href="{{ url('buku/' . $data->slug) }}"
+                                                    class="badge border-primary border"><i
+                                                        class='bx bxs-show text-primary'></i></a>
+                                                <a href="{{ url('buku/delete/' . $data->id) }}"
+                                                    class="badge border-danger border" onclick="confirm(event)"><i
+                                                        class='bx bxs-trash text-danger'></i></a>
+                                                <button type="button" class="badge bg-light border-warning border"
+                                                    data-bs-toggle="modal" data-bs-target="#updateBuku"
+                                                    data-buku="{{ $data }}">
+                                                    <span class="fw-semibold"><i
+                                                            class="bx bxs-edit text-warning"></i></span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+
+                                    {{-- modal update --}}
+
+                                    <x-modal modalTitle="Update Buku" modalID="updateBuku" btn="Update" action=""
+                                        method="POST">
+
+                                        <div class="row mb-3">
+                                            <div class="input-group justify-content-between">
+                                                <div class="input-box col-sm-6" style="max-width: 48%">
+                                                    <label for="nama_kelas" class="col-sm-5 mb-2">Nama
+                                                        Kelas</label>
+                                                    <input type="text" id="nama_kelas" class="form-control"
+                                                        name="nama_kelas" placeholder="Masukkan Nama"
+                                                        value="{{ old('nama_kelas', $data->nama_kelas) }}">
+                                                </div>
+                                                <div class="input-box col-sm-6" style="max-width: 48%">
+                                                    <label class="mb-2">Kelas</label>
+                                                    <div class="col-sm-12">
+                                                        <select id="status" class="form-select " name="status">
+                                                            <option @if (old('status', $data->status) == 1) selected @endif
+                                                                value="1">Aktif</option>
+                                                            <option @if (old('status', $data->status) == 0) selected @endif
+                                                                value="0">Tidak Aktif</option>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </x-modal>
+
+                                    {{-- modal update --}}
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <x-modal modalTitle="Tambah Buku" modalID="addBuku" btn="Tambah" action="{{ url('buku') }}" method="POST">
+        <div class="row mb-3">
+            <div class="input-group justify-content-between">
+                <div class="input-box col-sm-6" style="max-width: 48%">
+                    <label for="nama_kelas" class="col-sm-5 mb-2">Nama Kelas</label>
+                    <input type="text" id="nama_kelas" class="form-control @error('nama_kelas') is-invalid @enderror"
+                        name="nama_kelas" placeholder="Masukkan Nama" value="{{ old('nama_kelas') }}">
+                    @error('nama_kelas')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="input-box col-sm-6" style="max-width: 48%">
+                    <label class="mb-2">Kelas</label>
+                    <div class="col-sm-12">
+                        <select id="status" class="form-select @error('status') is-invalid @enderror" name="status">
+                            <option selected value="">- Pilih Status -</option>
+                            <option value="1">Aktif</option>
+                            <option value="0">Tidak Aktif</option>
+                        </select>
+                        @error('status')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+    </x-modal>
+
+
+    {{-- Modal Error --}}
+    @if (session('addKelas'))
+        <script>
+            toastr.error("{{ Session::get('addKelas') }}");
+            $(document).ready(function() {
+                $('#addKelas').modal('show');
+            });
+        </script>
+    @endif
+
+
+    @if (session('updateKelas'))
+        <script>
+            swal("Error!", "{{ Session::get('updateKelas') }}", "error"), {
+                button: true,
+                button: 'ok'
+            }
+            @foreach ($errors->all() as $error)
+                toastr.error("{{ $error }}");
+            @endforeach
+        </script>
+    @endif
+
+    {{-- Alert --}}
+    @if (Session::has('success'))
+        <script>
+            swal("Success!", "{{ Session::get('success') }}", "success"), {
+                button: true,
+                button: 'ok'
+            }
+        </script>
+    @elseif (Session::has('error'))
+        <script>
+            swal("Error!", "{{ Session::get('error') }}", "error"), {
+                button: true,
+                button: 'ok'
+            }
+        </script>
+    @endif
+</x-layouts.main>

@@ -9,4 +9,10 @@ class Buku extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $with = ['rak'];
+
+    public function rak()
+    {
+        return $this->belongsTo(Rak::class);
+    }
 }

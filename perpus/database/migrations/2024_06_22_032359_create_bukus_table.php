@@ -13,16 +13,19 @@ return new class extends Migration
     {
         Schema::create('bukus', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('pengarang_id');
-            $table->unsignedBigInteger('penerbit_id');
             $table->unsignedBigInteger('rak_id');
-            $table->foreign('pengarang_id')->references('id')->on('pengarangs');
-            $table->foreign('penerbit_id')->references('id')->on('penerbits');
             $table->foreign('rak_id')->references('id')->on('raks');
-            $table->string('judul', 30);
-            $table->integer('tahun_terbit');
+            $table->string('judul', 100);
+            $table->string('slug');
+            $table->string('isbn', 15)->nullable();
+            $table->string('pengarang')->nullable();
+            $table->string('penerbit')->nullable();
+            $table->integer('tahun_terbit')->nullable();
+            $table->string('tempat_terbit')->nullable();
             $table->integer('jumlah');
-            $table->string('isbn', 15);
+            $table->string('bahasa', 20);
+            $table->integer('halaman');
+            $table->string('image', 50)->default('buku.png');
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@ class PetugasController extends Controller
      */
     public function index()
     {
-        return view('petugas.index', [
+        return view('master-data.petugas', [
             'title' => "Petugas",
             'main_page' => 'Master',
             'page' => 'Petugas',
@@ -44,7 +44,6 @@ class PetugasController extends Controller
         ], [
 
             'name.required' => 'Nama Tidak Boleh Kosong!',
-            'name.unique' => 'Nama Sudah Ada!',
             'name.max' => 'Max 30 Karakter!',
 
             'email.required' => 'Email Tidak Boleh Kosong!',
@@ -110,7 +109,6 @@ class PetugasController extends Controller
             'username' => 'required|max:8',
         ], [
             'name.required' => 'Nama Tidak Boleh Kosong!',
-            'name.unique' => 'Nama Sudah Ada!',
             'name.max' => 'Max 30 Karakter!',
 
             'username.required' => 'Username Tidak Boleh Kosong!',

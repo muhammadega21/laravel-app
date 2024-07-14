@@ -385,7 +385,16 @@ $("#updateSiswa").on("show.bs.modal", function (event) {
     $("#username").val(siswa.username);
     $("#email").val(siswa.user.email);
     $("#nis").val(siswa.nis);
-
-    // Set the selected kelas option
     $("#kelas_id").val(siswa.kelas_id);
+});
+
+$("#updateKelas").on("show.bs.modal", function (event) {
+    const button = $(event.relatedTarget);
+    const kelas = button.data("kelas");
+    const idKelas = kelas.id;
+
+    $("#updateKelas form").attr("action", "kelas/update/" + idKelas);
+
+    $("#nama_kelas").val(kelas.nama_kelas);
+    $("#status").val(kelas.status);
 });

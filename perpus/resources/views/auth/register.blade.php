@@ -28,6 +28,9 @@
     <link href="{{ asset('vendor/simple-datatables/style.css') }}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
+    <link href="{{ asset('css/main.css?v=' . time()) }}" rel="stylesheet">
+
+    <!-- My CSS File -->
     <link href="{{ asset('css/style.css?v=' . time()) }}" rel="stylesheet">
 </head>
 
@@ -144,7 +147,10 @@
     <script src="{{ asset('vendor/php-email-form/validate.js') }}"></script>
 
     <!-- Template Main JS File -->
-    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/main.js?v=' . time()) }}"></script>
+
+    <!-- My JS File -->
+    <script src="{{ asset('js/script.js?v=' . time()) }}"></script>
 
 </body>
 

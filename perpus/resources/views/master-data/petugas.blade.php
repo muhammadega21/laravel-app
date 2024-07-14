@@ -19,10 +19,10 @@
                                     <th>
                                         No
                                     </th>
-                                    <th>ID Petugas</th>
-                                    <th>Nama</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
+                                    <th class="text-nowrap">ID Petugas</th>
+                                    <th class="text-nowrap">Nama</th>
+                                    <th class="text-nowrap">Email</th>
+                                    <th class="text-nowrap">Role</th>
                                     <th data-sortable="false">Action</th>
                                 </tr>
                             </thead>
@@ -30,20 +30,22 @@
                                 @foreach ($datas as $data)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $data->id_petugas }}</td>
-                                        <td>{{ $data->name }}</td>
-                                        <td>{{ $data->user->email }}</td>
-                                        <td>{{ $data->user->role == 1 ? 'Admin' : 'Petugas' }}</td>
-                                        <td class="d-flex gap-1">
-                                            <a href="{{ url('petugas/delete/' . $data->id_petugas) }}"
-                                                class="badge border-danger border" onclick="confirm(event)"><i
-                                                    class='bx bxs-trash text-danger'></i></a>
-                                            <button type="button" class="badge bg-light border-warning border"
-                                                data-bs-toggle="modal" data-bs-target="#updatePetugas"
-                                                data-petugas="{{ $data }}">
-                                                <span class="fw-semibold"><i
-                                                        class="bx bxs-edit text-warning"></i></span>
-                                            </button>
+                                        <td class="text-nowrap">{{ $data->id_petugas }}</td>
+                                        <td class="text-nowrap">{{ $data->name }}</td>
+                                        <td class="text-nowrap">{{ $data->user->email }}</td>
+                                        <td class="text-nowrap">{{ $data->user->role == 1 ? 'Admin' : 'Petugas' }}</td>
+                                        <td class="text-nowrap">
+                                            <div class="d-fle gap-1">
+                                                <a href="{{ url('petugas/delete/' . $data->id_petugas) }}"
+                                                    class="badge border-danger border" onclick="confirm(event)"><i
+                                                        class='bx bxs-trash text-danger'></i></a>
+                                                <button type="button" class="badge bg-light border-warning border"
+                                                    data-bs-toggle="modal" data-bs-target="#updatePetugas"
+                                                    data-petugas="{{ $data }}">
+                                                    <span class="fw-semibold"><i
+                                                            class="bx bxs-edit text-warning"></i></span>
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
 

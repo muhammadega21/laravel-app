@@ -17,10 +17,10 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>ID Siswa</th>
-                                    <th>Nama</th>
-                                    <th>NIS</th>
-                                    <th>Kelas</th>
+                                    <th class="text-nowrap">ID Siswa</th>
+                                    <th class="text-nowrap">Nama</th>
+                                    <th class="text-nowrap">NIS</th>
+                                    <th class="text-nowrap">Kelas</th>
                                     <th data-sortable="false">Action</th>
                                 </tr>
                             </thead>
@@ -28,20 +28,22 @@
                                 @foreach ($datas as $data)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $data->id_siswa }}</td>
-                                        <td>{{ $data->name }}</td>
-                                        <td>{{ $data->nis }}</td>
-                                        <td>{{ $data->kelas->nama_kelas }}</td>
-                                        <td class="d-flex gap-1">
-                                            <a href="{{ url('siswa/delete/' . $data->id_siswa) }}"
-                                                class="badge border-danger border" onclick="confirm(event)"><i
-                                                    class='bx bxs-trash text-danger'></i></a>
-                                            <button type="button" class="badge bg-light border-warning border"
-                                                data-bs-toggle="modal" data-bs-target="#updateSiswa"
-                                                data-siswa="{{ $data }}">
-                                                <span class="fw-semibold"><i
-                                                        class="bx bxs-edit text-warning"></i></span>
-                                            </button>
+                                        <td class="text-nowrap">{{ $data->id_siswa }}</td>
+                                        <td class="text-nowrap">{{ $data->name }}</td>
+                                        <td class="text-nowrap">{{ $data->nis }}</td>
+                                        <td class="text-nowrap">{{ $data->kelas->nama_kelas }}</td>
+                                        <td class="text-nowrap">
+                                            <div class="d-flex gap-1">
+                                                <a href="{{ url('siswa/delete/' . $data->id_siswa) }}"
+                                                    class="badge border-danger border" onclick="confirm(event)"><i
+                                                        class='bx bxs-trash text-danger'></i></a>
+                                                <button type="button" class="badge bg-light border-warning border"
+                                                    data-bs-toggle="modal" data-bs-target="#updateSiswa"
+                                                    data-siswa="{{ $data }}">
+                                                    <span class="fw-semibold"><i
+                                                            class="bx bxs-edit text-warning"></i></span>
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
 
@@ -138,7 +140,8 @@
 
     {{-- Modal Tambah Siswa --}}
 
-    <x-modal modalTitle="Tambah Siswa" modalID="addSiswa" btn="Tambah" action="{{ url('siswa') }}" method="POST">
+    <x-modal modalTitle="Tambah Siswa" modalID="addSiswa" btn="Tambah" action="{{ url('siswa') }}"
+        method="POST">
         <div class="row mb-3">
             <div class="input-group justify-content-between">
                 <div class="input-box col-sm-6" style="max-width: 48%">

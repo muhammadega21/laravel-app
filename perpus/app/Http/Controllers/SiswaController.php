@@ -15,7 +15,7 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        return view('siswa.index', [
+        return view('master-data.siswa', [
             'title' => "Siswa",
             'main_page' => 'Master',
             'page' => 'Siswa',
@@ -47,7 +47,6 @@ class SiswaController extends Controller
         ], [
 
             'name.required' => 'Nama Tidak Boleh Kosong!',
-            'name.unique' => 'Nama Sudah Ada!',
             'name.max' => 'Max 30 Karakter!',
 
             'email.required' => 'Email Tidak Boleh Kosong!',
@@ -128,7 +127,6 @@ class SiswaController extends Controller
 
         $validator = Validator::make($request->all(), $rules, [
             'name.required' => 'Nama Tidak Boleh Kosong!',
-            'name.unique' => 'Nama Sudah Ada!',
             'name.max' => 'Max 30 Karakter!',
 
             'username.required' => 'Username Tidak Boleh Kosong!',

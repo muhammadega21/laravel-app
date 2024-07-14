@@ -26,53 +26,45 @@
                         <i class="bi bi-circle"></i><span>Data Petugas</span>
                     </a>
                 </li>
-            </ul>
-            <ul id="master-data"
-                class="nav-content collapse {{ Request::is(['petugas', 'siswa', 'kelas']) ? 'show' : '' }}"
-                data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="{{ url('siswa') }}" class="{{ Request::is('siswa') ? 'active' : '' }}">
                         <i class="bi bi-circle"></i><span>Data Siswa</span>
                     </a>
                 </li>
-            </ul>
-            <ul id="master-data"
-                class="nav-content collapse {{ Request::is(['petugas', 'siswa', 'kelas']) ? 'show' : '' }}"
-                data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="components-alerts.html" class="{{ Request::is('kelas') ? 'active' : '' }}">
+                    <a href="{{ url('kelas') }}" class="{{ Request::is('kelas') ? 'active' : '' }}">
                         <i class="bi bi-circle"></i><span>Data Kelas</span>
                     </a>
                 </li>
             </ul>
+
         </li><!-- End Master Data -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#katalog-buku" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-book"></i><span>Katalog Buku</span><i class="bi bi-chevron-down ms-auto"></i>
+            <a class="nav-link {{ Request::is(['buku', 'pengarang', 'penerbit', 'rak']) ? 'active' : 'collapsed' }}"
+                data-bs-target="#katalog-buku" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-card-list"></i><span>Katalog Buku</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="katalog-buku" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <ul id="katalog-buku"
+                class="nav-content collapse {{ Request::is(['buku', 'pengarang', 'penerbit', 'rak']) ? 'show' : '' }}"
+                data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="components-alerts.html">
+                    <a href="{{ url('buku') }}" class="{{ Request::is('buku') ? 'active' : '' }}">
                         <i class="bi bi-circle"></i><span>Data Buku</span>
                     </a>
                 </li>
                 <li>
-                    <a href="components-alerts.html">
-                        <i class="bi bi-circle"></i><span>Data Pengarang</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-alerts.html">
-                        <i class="bi bi-circle"></i><span>Data Penerbit</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-alerts.html">
+                    <a href="{{ url('rak') }}" class="{{ Request::is('rak') ? 'active' : '' }}">
                         <i class="bi bi-circle"></i><span>Data Rak</span>
                     </a>
                 </li>
             </ul>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="users-profile.html">
+                <i class="bi bi-book"></i>
+                <span>Daftar Buku</span>
+            </a>
+        </li>
         <li class="nav-item">
             <a class="nav-link collapsed" href="users-profile.html">
                 <i class="bi bi-clipboard-minus"></i>

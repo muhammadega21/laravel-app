@@ -28,6 +28,9 @@
     <link href="{{ asset('vendor/simple-datatables/style.css') }}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
+    <link href="{{ asset('css/main.css?v=' . time()) }}" rel="stylesheet">
+
+    <!-- My CSS File -->
     <link href="{{ asset('css/style.css?v=' . time()) }}" rel="stylesheet">
 
     {{-- CDN --}}
@@ -38,7 +41,6 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
-
 
 </head>
 
@@ -83,6 +85,9 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('js/main.js?v=' . time()) }}"></script>
+
+    <!-- My JS File -->
+    <script src="{{ asset('js/script.js?v=' . time()) }}"></script>
 
 </body>
 
