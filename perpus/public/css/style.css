@@ -13,3 +13,8 @@
         width: 100%;
     }
 }
+
+.required::after {
+    content: "*";
+    color: rgb(228, 19, 19);
+}

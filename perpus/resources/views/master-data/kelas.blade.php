@@ -55,14 +55,14 @@
                                         <div class="row mb-3">
                                             <div class="input-group justify-content-between">
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
-                                                    <label for="nama_kelas" class="col-sm-5 mb-2">Nama
+                                                    <label for="nama_kelas" class="col-sm-6 mb-2 required">Nama
                                                         Kelas</label>
                                                     <input type="text" id="nama_kelas" class="form-control"
                                                         name="nama_kelas" placeholder="Masukkan Nama"
                                                         value="{{ old('nama_kelas', $data->nama_kelas) }}">
                                                 </div>
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
-                                                    <label class="mb-2">Kelas</label>
+                                                    <label class="mb-2 required">Kelas</label>
                                                     <div class="col-sm-12">
                                                         <select id="status" class="form-select " name="status">
                                                             <option @if (old('status', $data->status) == 1) selected @endif
@@ -91,7 +91,7 @@
         <div class="row mb-3">
             <div class="input-group justify-content-between">
                 <div class="input-box col-sm-6" style="max-width: 48%">
-                    <label for="nama_kelas" class="col-sm-5 mb-2">Nama Kelas</label>
+                    <label for="nama_kelas" class="col-sm-6 mb-2 required">Nama Kelas</label>
                     <input type="text" id="nama_kelas" class="form-control @error('nama_kelas') is-invalid @enderror"
                         name="nama_kelas" placeholder="Masukkan Nama" value="{{ old('nama_kelas') }}">
                     @error('nama_kelas')
@@ -101,7 +101,7 @@
                     @enderror
                 </div>
                 <div class="input-box col-sm-6" style="max-width: 48%">
-                    <label class="mb-2">Kelas</label>
+                    <label class="mb-2 required">Kelas</label>
                     <div class="col-sm-12">
                         <select id="status" class="form-select @error('status') is-invalid @enderror" name="status">
                             <option selected value="">- Pilih Status -</option>

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->char('no_telp', 15)->nullable();
             $table->boolean('jenis_kelamin')->nullable();
             $table->text('alamat')->nullable();
-            $table->string('image', 50)->default('user.png');
+            $table->string('image')->default('user.png');
             $table->timestamps();
         });
     }

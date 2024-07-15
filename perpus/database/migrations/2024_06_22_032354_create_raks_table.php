@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->char('id_rak');
             $table->string('nama_rak', 20);
-            $table->text('keterangan');
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }

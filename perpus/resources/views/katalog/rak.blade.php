@@ -52,7 +52,7 @@
                                         method="POST">
 
                                         <div class="row mb-3">
-                                            <label for="nama_rak" class="col-sm-5 mb-2">Nama Rak</label>
+                                            <label for="nama_rak" class="col-sm-5 mb-2 required">Nama Rak</label>
                                             <div class="input-box col-sm-12">
                                                 <input type="text" id="nama_rak" class="form-control "
                                                     name="nama_rak" placeholder="Masukkan Nama Rak"
@@ -82,7 +82,7 @@
 
     <x-modal modalTitle="Tambah Rak" modalID="addRak" btn="Tambah" action="{{ url('rak') }}" method="POST">
         <div class="row mb-3">
-            <label for="nama_rak" class="col-sm-5 mb-2">Nama Rak</label>
+            <label for="nama_rak" class="col-sm-5 mb-2 required">Nama Rak</label>
             <div class="input-box col-sm-12">
                 <input type="text" id="nama_rak" class="form-control @error('nama_rak') is-invalid @enderror"
                     name="nama_rak" placeholder="Masukkan Nama Rak" value="{{ old('nama_rak') }}">

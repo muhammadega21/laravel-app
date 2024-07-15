@@ -64,7 +64,7 @@
                                     <form class="row g-3" action="{{ url('register') }}" method="POST">
                                         @csrf
                                         <div class="col-12">
-                                            <label for="yourName" class="form-label">Nama</label>
+                                            <label for="yourName" class="form-label required">Nama</label>
                                             <input type="text" name="name"
                                                 class="form-control @error('name') is-invalid @enderror"
                                                 value="{{ old('name') }}" id="yourName">
@@ -76,7 +76,7 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <label for="yourEmail" class="form-label">Email</label>
+                                            <label for="yourEmail" class="form-label required">Email</label>
                                             <input type="email" name="email"
                                                 class="form-control @error('email') is-invalid @enderror"
                                                 value="{{ old('email') }}" id="yourEmail">
@@ -88,7 +88,7 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <label for="yourUsername" class="form-label">Username</label>
+                                            <label for="yourUsername" class="form-label required">Username</label>
                                             <div class="input-group has-validation">
                                                 <input type="text" name="username"
                                                     class="form-control @error('username') is-invalid @enderror"
@@ -102,7 +102,7 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <label for="yourPassword" class="form-label">Password</label>
+                                            <label for="yourPassword" class="form-label required">Password</label>
                                             <input type="password" name="password"
                                                 class="form-control @error('password') is-invalid @enderror"
                                                 id="yourPassword">

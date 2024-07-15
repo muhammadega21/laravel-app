@@ -21,11 +21,11 @@ return new class extends Migration
             $table->string('pengarang')->nullable();
             $table->string('penerbit')->nullable();
             $table->integer('tahun_terbit')->nullable();
-            $table->string('tempat_terbit')->nullable();
+            $table->text('tempat_terbit')->nullable();
             $table->integer('jumlah');
-            $table->string('bahasa', 20);
-            $table->integer('halaman');
-            $table->string('image', 50)->default('buku.png');
+            $table->string('bahasa', 30)->nullable();
+            $table->integer('halaman')->nullable();
+            $table->string('image')->default('buku.png');
             $table->timestamps();
         });
     }

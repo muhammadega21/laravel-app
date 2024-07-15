@@ -62,7 +62,7 @@
                                         <div class="row mb-3">
                                             <div class="input-group justify-content-between">
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
-                                                    <label for="nama_kelas" class="col-sm-5 mb-2">Nama
+                                                    <label for="nama_kelas" class="col-sm-5 mb-2 ">Nama
                                                         Kelas</label>
                                                     <input type="text" id="nama_kelas" class="form-control"
                                                         name="nama_kelas" placeholder="Masukkan Nama"
@@ -98,24 +98,124 @@
         <div class="row mb-3">
             <div class="input-group justify-content-between">
                 <div class="input-box col-sm-6" style="max-width: 48%">
-                    <label for="nama_kelas" class="col-sm-5 mb-2">Nama Kelas</label>
-                    <input type="text" id="nama_kelas" class="form-control @error('nama_kelas') is-invalid @enderror"
-                        name="nama_kelas" placeholder="Masukkan Nama" value="{{ old('nama_kelas') }}">
-                    @error('nama_kelas')
+                    <label for="judul" class="col-sm-5 mb-2 required">Judul Buku</label>
+                    <input type="text" id="judul" class="form-control @error('judul') is-invalid @enderror"
+                        name="judul" placeholder="Masukkan Nama" value="{{ old('judul') }}">
+                    @error('judul')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
                 <div class="input-box col-sm-6" style="max-width: 48%">
-                    <label class="mb-2">Kelas</label>
-                    <div class="col-sm-12">
-                        <select id="status" class="form-select @error('status') is-invalid @enderror" name="status">
-                            <option selected value="">- Pilih Status -</option>
-                            <option value="1">Aktif</option>
-                            <option value="0">Tidak Aktif</option>
-                        </select>
-                        @error('status')
+                    <label for="isbn" class="col-sm-5 mb-2">ISBN</label>
+                    <input type="text" id="isbn" class="form-control @error('isbn') is-invalid @enderror"
+                        name="isbn" placeholder="Masukkan Nama" value="{{ old('isbn') }}">
+                    @error('isbn')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+            </div>
+            <div class="input-group justify-content-between mt-3">
+                <div class="input-box col-sm-6" style="max-width: 48%">
+                    <label for="jumlah" class="col-sm-5 mb-2 required">Jumlah</label>
+                    <input type="text" id="jumlah" class="form-control @error('jumlah') is-invalid @enderror"
+                        name="jumlah" placeholder="Masukkan Nama" value="{{ old('jumlah') }}">
+                    @error('jumlah')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="input-box col-sm-6" style="max-width: 48%">
+                    <label for="formFile" class="col-sm-6 mb-2">Sampul Buku</label>
+                    <input class="form-control" type="file" id="formFile">
+                </div>
+            </div>
+            <div class="input-group justify-content-between mt-3">
+                <div class="input-box col-sm-12">
+                    <label class="mb-2 required">Rak</label>
+                    <select class="form-select
+                        @error('rak_id') is-invalid @enderror"
+                        name="rak_id">
+                        <option selected value="">- Pilih Rak -</option>
+                        @foreach ($rak as $rak)
+                            <option value="{{ $rak->id }}" @if (old('rak_id') == $rak->id) selected @endif>
+                                {{ $rak->nama_rak }}</option>
+                        @endforeach
+                    </select>
+                    @error('rak_id')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+            </div>
+            <div class="input-group justify-content-between mt-3">
+                <div class="input-box col-sm-6" style="max-width: 48%">
+                    <label for="bahasa" class="col-sm-6 mb-2">Bahasa Buku</label>
+                    <input type="text" id="bahasa" class="form-control @error('bahasa') is-invalid @enderror"
+                        name="bahasa" placeholder="Masukkan Nama" value="{{ old('bahasa') }}">
+                    @error('bahasa')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="input-box col-sm-6" style="max-width: 48%">
+                    <label for="halaman" class="col-sm-5 mb-2">Halaman</label>
+                    <input type="text" id="halaman" class="form-control @error('halaman') is-invalid @enderror"
+                        name="halaman" placeholder="Masukkan Nama" value="{{ old('halaman') }}">
+                    @error('halaman')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="input-group justify-content-between mt-3">
+                    <div class="input-box col-sm-6" style="max-width: 48%">
+                        <label for="pengarang" class="col-sm-5 mb-2">Pengarang</label>
+                        <input type="text" id="pengarang"
+                            class="form-control @error('pengarang') is-invalid @enderror" name="pengarang"
+                            placeholder="Masukkan Nama" value="{{ old('pengarang') }}">
+                        @error('pengarang')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="input-box col-sm-6" style="max-width: 48%">
+                        <label for="penerbit" class="col-sm-5 mb-2">Penerbit</label>
+                        <input type="text" id="penerbit"
+                            class="form-control @error('penerbit') is-invalid @enderror" name="penerbit"
+                            placeholder="Masukkan Nama" value="{{ old('penerbit') }}">
+                        @error('penerbit')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="input-group justify-content-between mt-3">
+                    <div class="input-box col-sm-6" style="max-width: 48%">
+                        <label for="tahun_terbit" class="col-sm-6 mb-2">Tahun Terbit</label>
+                        <input type="text" id="tahun_terbit"
+                            class="form-control @error('tahun_terbit') is-invalid @enderror" name="tahun_terbit"
+                            placeholder="Masukkan Nama" value="{{ old('tahun_terbit') }}">
+                        @error('tahun_terbit')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="input-box col-sm-6" style="max-width: 48%">
+                        <label for="tempat_terbit" class="col-sm-6 mb-2">Tempat Terbit</label>
+                        <input type="text" id="tempat_terbit"
+                            class="form-control @error('tempat_terbit') is-invalid @enderror" name="tempat_terbit"
+                            placeholder="Masukkan Nama" value="{{ old('tempat_terbit') }}">
+                        @error('tempat_terbit')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
@@ -127,11 +227,11 @@
 
 
     {{-- Modal Error --}}
-    @if (session('addKelas'))
+    @if (session('addBuku'))
         <script>
-            toastr.error("{{ Session::get('addKelas') }}");
+            toastr.error("{{ Session::get('addBuku') }}");
             $(document).ready(function() {
-                $('#addKelas').modal('show');
+                $('#addBuku').modal('show');
             });
         </script>
     @endif

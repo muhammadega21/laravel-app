@@ -57,14 +57,15 @@
                                         <div class="row mb-3">
                                             <div class="input-group justify-content-between">
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
-                                                    <label for="name" class="col-sm-6 col-form-label">Nama</label>
+                                                    <label for="name"
+                                                        class="col-sm-6 col-form-label required">Nama</label>
                                                     <input type="text" id="name" class="form-control "
                                                         name="name" placeholder="Masukkan Nama"
                                                         value="{{ old('name', $data->name) }}">
                                                 </div>
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
                                                     <label for="username"
-                                                        class="col-sm-6 col-form-label">Username</label>
+                                                        class="col-sm-6 col-form-label required">Username</label>
                                                     <input type="text" id="username" class="form-control "
                                                         name="username" placeholder="Masukkan Username"
                                                         value="{{ old('username', $data->username) }}">
@@ -74,19 +75,20 @@
                                         <div class="row mb-3">
                                             <div class="input-group col-sm-6 justify-content-between">
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
-                                                    <label for="email" class="col-sm-6 col-form-label">Email</label>
+                                                    <label for="email"
+                                                        class="col-sm-6 col-form-label required">Email</label>
                                                     <input type="email" id="email" class="form-control" disabled
                                                         placeholder="Masukkan Email" value="{{ $data->user->email }}">
                                                 </div>
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
-                                                    <label class="col-sm-6 col-form-label">Password</label>
+                                                    <label class="col-sm-6 col-form-label required">Password</label>
                                                     <input type="password" disabled class="form-control"
                                                         placeholder="Masukkan Password">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label class="mb-2">Kelas</label>
+                                            <label class="mb-2 required">Kelas</label>
                                             <div class="col-sm-12">
                                                 <select id="kelas_id" class="form-select " name="kelas_id">
                                                     <option selected value="">- Pilih kelas -</option>
@@ -145,7 +147,7 @@
         <div class="row mb-3">
             <div class="input-group justify-content-between">
                 <div class="input-box col-sm-6" style="max-width: 48%">
-                    <label for="name" class="col-sm-2 col-form-label">Nama</label>
+                    <label for="name" class="col-sm-2 col-form-label required">Nama</label>
                     <input type="text" id="name" class="form-control @error('name') is-invalid @enderror"
                         name="name" placeholder="Masukkan Nama" value="{{ old('name') }}">
                     @error('name')
@@ -155,7 +157,7 @@
                     @enderror
                 </div>
                 <div class="input-box col-sm-6" style="max-width: 48%">
-                    <label for="username" class="col-sm-2 col-form-label">Username</label>
+                    <label for="username" class="col-sm-2 col-form-label required">Username</label>
                     <input type="text" id="username" class="form-control @error('username') is-invalid @enderror"
                         name="username" placeholder="Masukkan Username" value="{{ old('username') }}">
                     @error('username')
@@ -169,7 +171,7 @@
         <div class="row mb-3">
             <div class="input-group col-sm-6 justify-content-between">
                 <div class="input-box col-sm-6" style="max-width: 48%">
-                    <label for="email" class="col-sm-2 col-form-label">Email</label>
+                    <label for="email" class="col-sm-2 col-form-label required">Email</label>
                     <input type="email" id="email" class="form-control @error('email') is-invalid @enderror"
                         name="email" placeholder="Masukkan Email" value="{{ old('email') }}">
                     @error('email')
@@ -179,7 +181,7 @@
                     @enderror
                 </div>
                 <div class="input-box col-sm-6" style="max-width: 48%">
-                    <label for="password" class="col-sm-2 col-form-label">Password</label>
+                    <label for="password" class="col-sm-2 col-form-label required">Password</label>
                     <input type="password" id="password"
                         class="form-control @error('password') is-invalid @enderror" name="password"
                         placeholder="Masukkan Password">
@@ -192,9 +194,9 @@
             </div>
         </div>
         <div class="row mb-3">
-            <label class="mb-2">Kelas</label>
+            <label class="mb-2 required">Kelas</label>
             <div class="col-sm-12">
-                <select class="form-select @error('kelas_id') is-invalid @enderror" name="kelas_id">
+                <select class="form-select @error('kelas_id') is-invalid @enderror required" name="kelas_id">
                     <option selected value="">- Pilih kelas -</option>
                     @foreach ($kelas as $kelas)
                         <option value="{{ $kelas->id }}" @if (old('kelas_id') == $kelas->id) selected @endif>

@@ -66,11 +66,11 @@ class DatabaseSeeder extends Seeder
             'slug' => 'pendidikan-agama-islam-sma-kelas-xi',
             'pengarang' => 'Sadi, H.M.Nasikin, A.Ilyas Ismail',
             'penerbit' => 'Erlangga',
-            'tahun_terbit' => '2015',
+            'tahun_terbit' => 2015,
             'tempat_terbit' => 'Jakarta',
             'jumlah' => 70,
             'bahasa' => 'Indonesia',
-            'halaman' => '150',
+            'halaman' => 150,
             'isbn' => '9786022415602'
         ]);
     }
