@@ -104,7 +104,7 @@ class RakController extends Controller
             return redirect()->back()->withErrors($validator)->withInput()->with('updateRak', 'Gagal Update Rak');
         }
 
-        Rak::where('id_rak', $id)->update([
+        Rak::where('id', $data->id)->update([
             'nama_rak' => $request->input('nama_rak'),
             'keterangan' => $request->input('keterangan'),
         ]);

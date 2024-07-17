@@ -63,3 +63,22 @@ $("#updateRak").on("show.bs.modal", function (event) {
     $("#nama_rak").val(rak.nama_rak);
     $("#keterangan").val(rak.keterangan);
 });
+
+$("#updateBuku").on("show.bs.modal", function (event) {
+    const button = $(event.relatedTarget);
+    const buku = button.data("buku");
+    const slugBuku = buku.slug;
+
+    $("#updateBuku form").attr("action", "buku/update/" + slugBuku);
+
+    $("#judul").val(buku.judul);
+    $("#isbn").val(buku.isbn);
+    $("#rak_id").val(buku.rak_id);
+    $("#pengarang").val(buku.pengarang);
+    $("#penerbit").val(buku.penerbit);
+    $("#tahun_terbit").val(buku.tahun_terbit);
+    $("#tempat_terbit").val(buku.tempat_terbit);
+    $("#jumlah").val(buku.jumlah);
+    $("#bahasa").val(buku.bahasa);
+    $("#halaman").val(buku.halaman);
+});

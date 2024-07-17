@@ -18,3 +18,8 @@
     content: "*";
     color: rgb(228, 19, 19);
 }
+
+button,
+a {
+    transition: 0.2s ease-in;
+}

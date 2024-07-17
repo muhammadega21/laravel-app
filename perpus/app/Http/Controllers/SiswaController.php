@@ -43,7 +43,7 @@ class SiswaController extends Controller
             'username' => 'required|max:8',
             'password' => 'required|min:4',
             'kelas_id' => 'required',
-            'nis' => 'required|max:10|unique:siswas,nis'
+            'nis' => 'max:10|unique:siswas,nis'
         ], [
 
             'name.required' => 'Nama Tidak Boleh Kosong!',
@@ -61,7 +61,6 @@ class SiswaController extends Controller
 
             'kelas_id.required' => 'Kelas Tidak Boleh Kosong!',
 
-            'nis.required' => 'NIS Tidak Boleh Kosong!',
             'nis.max' => 'Max 10 Karakter!',
             'nis.unique' => 'NIS Sudah Ada!'
         ]);
@@ -122,7 +121,7 @@ class SiswaController extends Controller
         ];
 
         if ($request->nis != $data->nis) {
-            $rules['nis'] = 'required|max:10|unique:siswas,nis';
+            $rules['nis'] = 'max:10|unique:siswas,nis';
         }
 
         $validator = Validator::make($request->all(), $rules, [
@@ -134,7 +133,6 @@ class SiswaController extends Controller
 
             'kelas_id.required' => 'Kelas Tidak Boleh Kosong!',
 
-            'nis.required' => 'NIS Tidak Boleh Kosong!',
             'nis.max' => 'Max 10 Karakter!',
             'nis.unique' => 'NIS Sudah Ada!'
         ]);
@@ -145,7 +143,7 @@ class SiswaController extends Controller
             return redirect()->back()->withErrors($validator)->withInput()->with('updateSiswa', 'Gagal Update Siswa');
         }
 
-        Siswa::where('id_siswa', $id)->update([
+        Siswa::where('id', $data->id)->update([
             'username' => $request->input('username'),
             'name' => $request->input('name'),
             'kelas_id' => $request->input('kelas_id'),

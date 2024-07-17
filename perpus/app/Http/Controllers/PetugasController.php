@@ -104,6 +104,8 @@ class PetugasController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $data = Petugas::where('id_petugas', $id)->first();
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:30',
             'username' => 'required|max:8',
@@ -119,7 +121,7 @@ class PetugasController extends Controller
             return redirect()->back()->withErrors($validator)->withInput()->with('updatePetugas', 'Gagal Update Petugas');
         }
 
-        Petugas::where('id_petugas', $id)->update([
+        Petugas::where('id', $data->id)->update([
             'username' => $request->input('username'),
             'name' => $request->input('name'),
         ]);

@@ -58,8 +58,7 @@
                                                     <label for="nama_kelas" class="col-sm-6 mb-2 required">Nama
                                                         Kelas</label>
                                                     <input type="text" id="nama_kelas" class="form-control"
-                                                        name="nama_kelas" placeholder="Masukkan Nama"
-                                                        value="{{ old('nama_kelas', $data->nama_kelas) }}">
+                                                        name="nama_kelas" placeholder="Masukkan Nama">
                                                 </div>
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
                                                     <label class="mb-2 required">Kelas</label>
@@ -74,6 +73,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
                                     </x-modal>
 
                                     {{-- modal update --}}
@@ -116,6 +116,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </x-modal>
 
 

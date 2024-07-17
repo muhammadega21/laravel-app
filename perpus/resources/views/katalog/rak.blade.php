@@ -55,8 +55,7 @@
                                             <label for="nama_rak" class="col-sm-5 mb-2 required">Nama Rak</label>
                                             <div class="input-box col-sm-12">
                                                 <input type="text" id="nama_rak" class="form-control "
-                                                    name="nama_rak" placeholder="Masukkan Nama Rak"
-                                                    value="{{ old('nama_rak', $data->nama_rak) }}">
+                                                    name="nama_rak" placeholder="Masukkan Nama Rak">
 
                                             </div>
                                         </div>
@@ -64,7 +63,7 @@
                                             <label for="keterangan" class="col-sm-5 mb-2">Keterangan</label>
                                             <div class=" b-3">
                                                 <textarea name="keterangan" id="keterangan" class="form-control " placeholder="Masukkan Keterangan Rak"
-                                                    id="floatingTextarea" style="height: 100px;">{{ old('keterangan', $data->keterangan) }}</textarea>
+                                                    id="floatingTextarea" style="height: 100px;"></textarea>
                                             </div>
                                         </div>
                                     </x-modal>

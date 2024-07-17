@@ -39,7 +39,7 @@
                                                 <a href="{{ url('buku/' . $data->slug) }}"
                                                     class="badge border-primary border"><i
                                                         class='bx bxs-show text-primary'></i></a>
-                                                <a href="{{ url('buku/delete/' . $data->id) }}"
+                                                <a href="{{ url('buku/delete/' . $data->slug) }}"
                                                     class="badge border-danger border" onclick="confirm(event)"><i
                                                         class='bx bxs-trash text-danger'></i></a>
                                                 <button type="button" class="badge bg-light border-warning border"
@@ -62,25 +62,85 @@
                                         <div class="row mb-3">
                                             <div class="input-group justify-content-between">
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
-                                                    <label for="nama_kelas" class="col-sm-5 mb-2 ">Nama
-                                                        Kelas</label>
-                                                    <input type="text" id="nama_kelas" class="form-control"
-                                                        name="nama_kelas" placeholder="Masukkan Nama"
-                                                        value="{{ old('nama_kelas', $data->nama_kelas) }}">
+                                                    <label for="judul" class="col-sm-5 mb-2 required">Judul
+                                                        Buku</label>
+                                                    <input type="text" id="judul" class="form-control"
+                                                        name="judul" placeholder="Masukkan Nama">
                                                 </div>
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
-                                                    <label class="mb-2">Kelas</label>
-                                                    <div class="col-sm-12">
-                                                        <select id="status" class="form-select " name="status">
-                                                            <option @if (old('status', $data->status) == 1) selected @endif
-                                                                value="1">Aktif</option>
-                                                            <option @if (old('status', $data->status) == 0) selected @endif
-                                                                value="0">Tidak Aktif</option>
-                                                        </select>
+                                                    <label for="isbn" class="col-sm-5 mb-2">ISBN</label>
+                                                    <input type="text" id="isbn" class="form-control"
+                                                        name="isbn" placeholder="Masukkan Nama">
+
+                                                </div>
+                                            </div>
+                                            <div class="input-group justify-content-between mt-3">
+                                                <div class="input-box col-sm-6" style="max-width: 48%">
+                                                    <label for="jumlah" class="col-sm-5 mb-2 required">Jumlah</label>
+                                                    <input type="text" id="jumlah" class="form-control "
+                                                        name="jumlah" placeholder="Masukkan Nama">
+
+                                                </div>
+                                                <div class="input-box col-sm-6" style="max-width: 48%">
+                                                    <label for="formFile" class="col-sm-6 mb-2">Sampul Buku</label>
+                                                    <input class="form-control" type="file" id="formFile">
+                                                </div>
+                                            </div>
+                                            <div class="input-group justify-content-between mt-3">
+                                                <div class="input-box col-sm-12">
+                                                    <label class="mb-2 required">Rak</label>
+                                                    <select id="rak_id" class="form-select" name="rak_id">
+                                                        <option selected value="">- Pilih Rak -</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                            <div class="input-group justify-content-between mt-3">
+                                                <div class="input-box col-sm-6" style="max-width: 48%">
+                                                    <label for="bahasa" class="col-sm-6 mb-2">Bahasa Buku</label>
+                                                    <input type="text" id="bahasa" class="form-control "
+                                                        name="bahasa" placeholder="Masukkan Nama">
+
+                                                </div>
+                                                <div class="input-box col-sm-6" style="max-width: 48%">
+                                                    <label for="halaman" class="col-sm-5 mb-2">Halaman</label>
+                                                    <input type="text" id="halaman" class="form-control "
+                                                        name="halaman" placeholder="Masukkan Nama">
+
+                                                </div>
+                                                <div class="input-group justify-content-between mt-3">
+                                                    <div class="input-box col-sm-6" style="max-width: 48%">
+                                                        <label for="pengarang" class="col-sm-5 mb-2">Pengarang</label>
+                                                        <input type="text" id="pengarang" class="form-control "
+                                                            name="pengarang" placeholder="Masukkan Nama">
+
+                                                    </div>
+                                                    <div class="input-box col-sm-6" style="max-width: 48%">
+                                                        <label for="penerbit" class="col-sm-5 mb-2">Penerbit</label>
+                                                        <input type="text" id="penerbit" class="form-control"
+                                                            name="penerbit" placeholder="Masukkan Nama">
+
+                                                    </div>
+                                                </div>
+                                                <div class="input-group justify-content-between mt-3">
+                                                    <div class="input-box col-sm-6" style="max-width: 48%">
+                                                        <label for="tahun_terbit" class="col-sm-6 mb-2">Tahun
+                                                            Terbit</label>
+                                                        <input type="text" id="tahun_terbit" class="form-control"
+                                                            name="tahun_terbit" placeholder="Masukkan Nama">
+
+                                                    </div>
+                                                    <div class="input-box col-sm-6" style="max-width: 48%">
+                                                        <label for="tempat_terbit" class="col-sm-6 mb-2">Tempat
+                                                            Terbit</label>
+                                                        <input type="text" id="tempat_terbit"
+                                                            class="form-control " name="tempat_terbit"
+                                                            placeholder="Masukkan Nama">
 
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
                                     </x-modal>
 
                                     {{-- modal update --}}
@@ -94,6 +154,21 @@
         </div>
     </div>
 
+    {{-- Select data rak --}}
+    <script>
+        $(document).ready(function() {
+            let rakData =
+                @json($rak);
+            let rakSelect = $("#rak_id");
+
+            $.each(rakData, function(index, rak) {
+                rakSelect.append("<option value='" + rak.id + "'>" + rak.nama_rak + "</option>");
+            });
+        });
+    </script>
+    {{-- Select data rak --}}
+
+    {{-- Modal Tambah Buku --}}
     <x-modal modalTitle="Tambah Buku" modalID="addBuku" btn="Tambah" action="{{ url('buku') }}" method="POST">
         <div class="row mb-3">
             <div class="input-group justify-content-between">
@@ -223,7 +298,9 @@
                     </div>
                 </div>
             </div>
+        </div>
     </x-modal>
+    {{-- Modal Tambah Buku --}}
 
 
     {{-- Modal Error --}}

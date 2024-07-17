@@ -62,15 +62,13 @@
                                                     <label for="name"
                                                         class="col-sm-6 col-form-label required">Nama</label>
                                                     <input type="text" id="name" class="form-control "
-                                                        name="name" placeholder="Masukkan Nama"
-                                                        value="{{ old('name', $data->name) }}">
+                                                        name="name" placeholder="Masukkan Nama">
                                                 </div>
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
                                                     <label for="username"
                                                         class="col-sm-6 col-form-label required">Username</label>
                                                     <input type="text" id="username" class="form-control "
-                                                        name="username" placeholder="Masukkan Username"
-                                                        value="{{ old('username', $data->username) }}">
+                                                        name="username" placeholder="Masukkan Username">
                                                 </div>
                                             </div>
                                         </div>
@@ -80,7 +78,7 @@
                                                     <label for="email"
                                                         class="col-sm-6 col-form-label required">Email</label>
                                                     <input type="email" id="email" class="form-control" disabled
-                                                        placeholder="Masukkan Email" value="{{ $data->user->email }}">
+                                                        placeholder="Masukkan Email">
                                                 </div>
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
                                                     <label class="col-sm-6 col-form-label required">Password</label>

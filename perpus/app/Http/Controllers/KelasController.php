@@ -76,7 +76,7 @@ class KelasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $id)
     {
         $data = Kelas::where('id', $id)->first();
         $rules = [
@@ -110,8 +110,10 @@ class KelasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
-        //
+        $kelas = Kelas::where('id', $id)->first();
+        Kelas::destroy($kelas->id);
+        return redirect('/kelas')->with('success', 'Berhasil menghapus kelas');
     }
 }

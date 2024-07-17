@@ -43,8 +43,9 @@ Route::post('kelas/update/{id}', [KelasController::class, 'update'])->middleware
 Route::resource('buku', BukuController::class)->middleware('auth');
 Route::get('buku/delete/{id}', [BukuController::class, 'destroy'])->middleware('auth');
 Route::post('buku/update/{id}', [BukuController::class, 'update'])->middleware('auth');
+Route::get('daftar_buku', [BukuController::class, 'daftar_buku'])->middleware('auth');
 
 // Rak
 Route::resource('rak', RakController::class)->middleware('auth');
-Route::get('rak/delete/{id}', [RakController::class, 'destroy'])->middleware('auth');
+Route::get('rak/delete/{slug}', [RakController::class, 'destroy'])->middleware('auth');
 Route::post('rak/update/{id}', [RakController::class, 'update'])->middleware('auth');
