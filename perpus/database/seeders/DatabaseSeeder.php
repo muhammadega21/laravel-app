@@ -62,8 +62,9 @@ class DatabaseSeeder extends Seeder
 
         Buku::create([
             'rak_id' => 1,
-            'judul' => 'Pendidikan Agama Islam SMA kelas XI',
+            'judul' => 'Pendidikan Agama Islam SMA Kelas XI',
             'slug' => 'pendidikan-agama-islam-sma-kelas-xi',
+            'sinopsis' => 'Buku Pendidikan Agama Islam SMA Kelas XI merupakan buku pelajaran tentang pendidikan agama Islam. Buku ini dikhususkan untuk siswa SMA Kelas XI.',
             'pengarang' => 'Sadi, H.M.Nasikin, A.Ilyas Ismail',
             'penerbit' => 'Erlangga',
             'tahun_terbit' => 2015,

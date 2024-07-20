@@ -168,6 +168,10 @@ h6 {
         border-top: 1px solid #eaedf1;
         border-left: 1px solid #eaedf1;
     }
+
+    .dropdown-menu-arrow.not::before {
+        display: none;
+    }
 }
 
 @keyframes dropdown-animate {

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('judul', 100);
             $table->string('slug');
             $table->string('isbn', 15)->nullable();
+            $table->text('sinopsis')->nullable();
             $table->string('pengarang')->nullable();
             $table->string('penerbit')->nullable();
             $table->integer('tahun_terbit')->nullable();

@@ -74,6 +74,7 @@ class BukuController extends Controller
             'slug' => $slug,
             'rak_id' => $request->input('rak_id'),
             'isbn' => $request->input('isbn'),
+            'sinopsis' => $request->input('sinopsis'),
             'pengarang' => $request->input('pengarang'),
             'penerbit' => $request->input('penerbit'),
             'tahun_terbit' => $request->input('tahun_terbit'),
@@ -89,9 +90,15 @@ class BukuController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $slug)
     {
-        //
+        $buku = Buku::where('slug', $slug)->first();
+        return view('show_buku', [
+            'title' => "Detail Buku",
+            'main_page' => 'Daftar Buku',
+            'page' => 'Detail Buku',
+            'buku' => $buku
+        ]);
     }
 
     /**
@@ -148,6 +155,7 @@ class BukuController extends Controller
             'slug' => $slug,
             'rak_id' => $request->input('rak_id'),
             'isbn' => $request->input('isbn'),
+            'sinopsis' => $request->input('sinopsis'),
             'pengarang' => $request->input('pengarang'),
             'penerbit' => $request->input('penerbit'),
             'tahun_terbit' => $request->input('tahun_terbit'),

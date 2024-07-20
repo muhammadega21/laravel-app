@@ -1,53 +1,45 @@
 <x-layouts.main :title="$title" :mainPage="$main_page" :page="$page">
-    <div class="col-12">
-        <div class="card top-selling overflow-auto">
+    <div class="row">
+        <div class="col-lg">
+            <div class="card">
+                <div class="card-body">
+                    <div class="overflow-x-auto mt-4">
+                        <div class="form-input d-flex justify-content-end">
+                            <input type="text" id="searchInput" placeholder="Search...">
+                        </div>
+                        <table class="table table-borderless mt-4" id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th data-sortable="false" class="text-nowrap">Sampul</th>
+                                    <th class="text-nowrap">Judul</th>
+                                    <th data-sortable="false" class="text-nowrap">Rak</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($datas as $data)
+                                    <tr>
+                                        <td class="align-middle">{{ $loop->iteration }}</td>
 
-            <div class="filter">
-                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                        <h6>Filter</h6>
-                    </li>
+                                        <td>
+                                            <a href="{{ url('daftar_buku/' . $data->slug) }}">
+                                                <img width="50" src="{{ asset('img/' . $data->image) }}"
+                                                    alt="{{ $data->judul }}" class="cover border">
+                                            </a>
+                                        </td>
+                                        <td class="align-middle">
+                                            <a href="{{ url('daftar_buku/' . $data->slug) }}"
+                                                class="text-primary fw-semibold">{{ $data->judul }}</a>
+                                        </td>
+                                        <td class="align-middle text-nowrap">{{ $data->rak->nama_rak }}</td>
+                                    </tr>
+                                @endforeach
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                </ul>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-
-            <div class="card-body pb-0">
-                <h5 class="card-title">Top Selling <span>| Today</span></h5>
-
-                <table class="table table-borderless">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Sampul</th>
-                            <th scope="col">Judul</th>
-                            <th scope="col">Jumlah</th>
-                            <th scope="col">Rak</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($datas as $data)
-                            <tr>
-                                <td class="fw-bold" scope="row">{{ $loop->iteration }}</a>
-                                    </th>
-                                <th><a href="{{ url('daftar_buku/' . $data->slug) }}"><img
-                                            src="{{ asset('img/' . $data->image) }}" alt="{{ $data->judul }}"></a>
-                                </th>
-                                <td class="fw-semibold"><a
-                                        href="{{ url('daftar_buku/' . $data->slug) }}">{{ $data->judul }}</a>
-                                </td>
-                                <td>{{ $data->jumlah }}</td>
-                                <td>{{ $data->rak->nama_rak }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-
-            </div>
-
         </div>
     </div>
 </x-layouts.main>

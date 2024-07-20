@@ -3,7 +3,7 @@
         <div class="col-lg">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center justify-content-between mt-2">
                         <h5 class="card-title">Data Siswa</h5>
                         <div class="btn-action">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"

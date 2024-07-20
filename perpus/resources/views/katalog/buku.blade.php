@@ -3,7 +3,7 @@
         <div class="col-lg">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center justify-content-between mt-2">
                         <h5 class="card-title">Data Buku</h5>
                         <div class="btn-action">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -87,7 +87,7 @@
                                                 </div>
                                             </div>
                                             <div class="input-group justify-content-between mt-3">
-                                                <div class="input-box col-sm-12">
+                                                <div class="input-box col-12">
                                                     <label class="mb-2 required">Rak</label>
                                                     <select id="rak_id" class="form-select" name="rak_id">
                                                         <option selected value="">- Pilih Rak -</option>
@@ -137,6 +137,14 @@
                                                             class="form-control " name="tempat_terbit"
                                                             placeholder="Masukkan Nama">
 
+                                                    </div>
+                                                    <div class="input-group justify-content-between mt-3">
+                                                        <div class="input-box col-12">
+                                                            <label for="sinopsis" class=" mb-2">Sinopsis</label>
+                                                            <textarea name="sinopsis" id="sinopsis" class="form-control " placeholder="Masukkan Sinopsis Buku"
+                                                                id="floatingTextarea" style="height: 100px;"></textarea>
+
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -291,6 +299,19 @@
                             class="form-control @error('tempat_terbit') is-invalid @enderror" name="tempat_terbit"
                             placeholder="Masukkan Nama" value="{{ old('tempat_terbit') }}">
                         @error('tempat_terbit')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                </div>
+                <div class="input-group justify-content-between mt-3">
+                    <div class="input-box col-12">
+                        <label for="sinopsis" class=" mb-2">Sinopsis</label>
+                        <textarea name="sinopsis" id="sinopsis" class="form-control " placeholder="Masukkan Sinopsis Buku"
+                            id="floatingTextarea" style="height: 100px;">{{ old('sinopsis') }}</textarea>
+                        @error('sinopsis')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>

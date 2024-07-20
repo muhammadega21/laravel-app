@@ -60,7 +60,7 @@
                 </li>
             </ul>
         <li class="nav-item">
-            <a class="nav-link collapsed {{ Request::is('daftar_buku') ? 'active' : '' }}"
+            <a class="nav-link collapsed {{ Request::is('daftar_buku*') ? 'active' : '' }}"
                 href="{{ url('daftar_buku') }}">
                 <i class="bi bi-book"></i>
                 <span>Daftar Buku</span>

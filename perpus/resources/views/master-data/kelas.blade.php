@@ -3,7 +3,7 @@
         <div class="col-lg">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center justify-content-between mt-2">
                         <h5 class="card-title">Data Kelas</h5>
                         <div class="btn-action">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -12,8 +12,8 @@
                             </button>
                         </div>
                     </div>
-                    <div class="overflow-x-auto">
-                        <table class="table datatable">
+                    <div class="overflow-x-auto mt-4">
+                        <table class="table ">
                             <thead>
                                 <tr>
                                     <th>
@@ -89,18 +89,19 @@
 
     <x-modal modalTitle="Tambah Kelas" modalID="addKelas" btn="Tambah" action="{{ url('kelas') }}" method="POST">
         <div class="row mb-3">
-            <div class="input-group justify-content-between">
-                <div class="input-box col-sm-6" style="max-width: 48%">
+            <div class="input-group d-flex justify-content-between flex-column flex-sm-row">
+                <div class="input-box mb-3" style="max-width: @media('sm') ? '48%' : ''">
                     <label for="nama_kelas" class="col-sm-6 mb-2 required">Nama Kelas</label>
-                    <input type="text" id="nama_kelas" class="form-control @error('nama_kelas') is-invalid @enderror"
-                        name="nama_kelas" placeholder="Masukkan Nama" value="{{ old('nama_kelas') }}">
+                    <input type="text" id="nama_kelas"
+                        class="form-control  @error('nama_kelas') is-invalid @enderror" name="nama_kelas"
+                        placeholder="Masukkan Nama" value="{{ old('nama_kelas') }}">
                     @error('nama_kelas')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
-                <div class="input-box col-sm-6" style="max-width: 48%">
+                <div class="input-box col-sm-6" style="@media('sm') ? 'max-width: 48%' : ''">
                     <label class="mb-2 required">Kelas</label>
                     <div class="col-sm-12">
                         <select id="status" class="form-select @error('status') is-invalid @enderror" name="status">
