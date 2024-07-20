@@ -15,4 +15,9 @@ class Petugas extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function peminjaman()
+    {
+        return $this->hasOne(Peminjaman::class);
+    }
 }

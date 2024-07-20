@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Petugas::create([
-            'id_petugas' => 'P001',
+            'id_petugas' => 'A001',
             'user_id' => 1,
             'username' => 'Admin',
             'name' => 'Administrator',

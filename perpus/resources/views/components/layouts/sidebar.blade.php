@@ -67,7 +67,8 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="users-profile.html">
+            <a class="nav-link collapsed {{ Request::is('peminjaman') ? 'active' : '' }}"
+                href="{{ url('peminjaman') }}">
                 <i class="bi bi-clipboard-minus"></i>
                 <span>Data peminjaman</span>
             </a>

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('siswa_id')->references('id')->on('siswas');
             $table->foreign('petugas_id')->references('id')->on('petugas');
             $table->foreign('buku_id')->references('id')->on('bukus');
+            $table->char('id_pinjam', 4)->nullable();
             $table->date('tgl_pinjam');
             $table->date('tgl_kembali');
             $table->timestamps();

@@ -4,6 +4,7 @@ use App\Http\Controllers\BukuController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\RakController;
 use App\Http\Controllers\SiswaController;
@@ -50,3 +51,8 @@ Route::get('daftar_buku/{slug}', [BukuController::class, 'show'])->middleware('a
 Route::resource('rak', RakController::class)->middleware('auth');
 Route::get('rak/delete/{slug}', [RakController::class, 'destroy'])->middleware('auth');
 Route::post('rak/update/{id}', [RakController::class, 'update'])->middleware('auth');
+
+// Peminjaman
+Route::resource('peminjaman', PeminjamanController::class)->middleware('auth');
+Route::get('peminjaman/delete/{slug}', [PeminjamanController::class, 'destroy'])->middleware('auth');
+Route::post('peminjaman/update/{id}', [PeminjamanController::class, 'update'])->middleware('auth');

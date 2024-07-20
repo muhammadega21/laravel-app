@@ -65,7 +65,7 @@ class PetugasController extends Controller
         // id_siswa
         $lastId = Petugas::latest('id_petugas')->first();
         $nextId = $lastId ? substr($lastId->id_petugas, 1) + 1 : 1;
-        $idSiswa = 'P' . str_pad($nextId, 3, '0', STR_PAD_LEFT);
+        $idSiswa = 'A' . str_pad($nextId, 3, '0', STR_PAD_LEFT);
 
         $user = User::create([
             'email' => $request->input('email'),
