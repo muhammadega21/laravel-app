@@ -13,8 +13,16 @@ return new class extends Migration
     {
         Schema::create('dendas', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_denda', 10);
+            $table->unsignedBigInteger('siswa_id')->nullable();
+            $table->foreign('siswa_id')->references('id')->on('siswas');
+            $table->unsignedBigInteger('buku_id')->nullable();
+            $table->foreign('buku_id')->references('id')->on('bukus');
+            $table->unsignedBigInteger('pengembalian_id')->nullable();
+            $table->foreign('pengembalian_id')->references('id')->on('pengembalians');
+            $table->char('id_denda', 6);
+            $table->string('nama_denda', 50);
             $table->integer('biaya_denda');
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

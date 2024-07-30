@@ -25,4 +25,9 @@ class Siswa extends Model
     {
         return $this->hasOne(Peminjaman::class);
     }
+
+    public function denda()
+    {
+        return $this->hasOne(Denda::class);
+    }
 }

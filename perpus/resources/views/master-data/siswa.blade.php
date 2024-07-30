@@ -52,7 +52,7 @@
                                     {{-- modal update --}}
 
                                     <x-modal modalTitle="Update Siswa" modalID="updateSiswa" btn="Update"
-                                        action="" method="POST">
+                                        action="" method="POST" enctype="multipart/form-data">
 
                                         <div class="row mb-3">
                                             <div class="input-group justify-content-between">
@@ -87,9 +87,8 @@
                                         </div>
                                         <div class="row mb-3">
                                             <label class="mb-2 required">Kelas</label>
-                                            <div class="col-sm-12">
-                                                <select id="kelas_id" class="form-select " name="kelas_id">
-                                                    <option selected value="">- Pilih kelas -</option>
+                                            <div class="col-sm-12 selectKelas">
+                                                <select id="kelas_id" class="form-control" name="kelas_id">
                                                 </select>
 
                                             </div>
@@ -98,8 +97,8 @@
                                             <div class="input-group col-sm-6 justify-content-between">
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
                                                     <label for="nis" class="col-sm-2">NIS</label>
-                                                    <input type="text" id="nis" class="form-control"
-                                                        name="nis" placeholder="Masukkan NIS">
+                                                    <input type="text" inputmode="numeric" id="nis"
+                                                        class="form-control" name="nis" placeholder="Masukkan NIS">
 
                                                 </div>
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
@@ -140,7 +139,7 @@
     {{-- Modal Tambah Siswa --}}
 
     <x-modal modalTitle="Tambah Siswa" modalID="addSiswa" btn="Tambah" action="{{ url('siswa') }}"
-        method="POST">
+        method="POST" enctype="multipart/form-data">
         <div class="row mb-3">
             <div class="input-group justify-content-between">
                 <div class="input-box col-sm-6" style="max-width: 48%">
@@ -193,7 +192,7 @@
         <div class="row mb-3">
             <label class="mb-2 required">Kelas</label>
             <div class="col-sm-12">
-                <select class="form-select @error('kelas_id') is-invalid @enderror required" name="kelas_id">
+                <select class="form-select select2AddSiswa @error('kelas_id') is-invalid @enderror " name="kelas_id">
                     <option selected value="">- Pilih kelas -</option>
                     @foreach ($kelas as $kelas)
                         <option value="{{ $kelas->id }}" @if (old('kelas_id') == $kelas->id) selected @endif>
@@ -211,8 +210,9 @@
             <div class="input-group col-sm-6 justify-content-between">
                 <div class="input-box col-sm-6" style="max-width: 48%">
                     <label for="nis" class="col-sm-2">NIS</label>
-                    <input type="text" id="nis" class="form-control @error('nis') is-invalid @enderror"
-                        name="nis" placeholder="Masukkan NIS" value="{{ old('nis') }}">
+                    <input type="text" inputmode="numeric" id="nis"
+                        class="form-control @error('nis') is-invalid @enderror" name="nis"
+                        placeholder="Masukkan NIS" value="{{ old('nis') }}">
                     @error('nis')
                         <div class="invalid-feedback">
                             {{ $message }}

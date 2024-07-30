@@ -10,6 +10,7 @@ class Peminjaman extends Model
     use HasFactory;
     protected $guarded = ['id'];
     protected $with = ['siswa', 'petugas', 'buku'];
+    protected $table = 'peminjamans';
 
     public function siswa()
     {

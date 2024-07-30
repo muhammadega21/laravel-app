@@ -30,23 +30,32 @@
                                 @foreach ($datas as $data)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td class="text-nowrap">{{ $data->id_pinjam }}</td>
-                                        <td class="text-nowrap">{{ $data->siswa->name }}</td>
-                                        <td class="text-nowrap">{{ $data->buku->judul }}</td>
-                                        <td class="text-nowrap">{{ $data->tgl_pinjam }}</td>
-                                        <td class="text-nowrap">{{ $data->tgl_kembali }}</td>
-                                        <td class="text-nowrap">{{ $data->petugas->name }}</td>
                                         <td class="text-nowrap">
+                                            {{ $data->id_pinjam }}</td>
+                                        <td><span class="trucated-text">{{ $data->siswa->name }}</span></td>
+                                        <td>
+                                            <a href="{{ url('daftar_buku/' . $data->buku->slug) }}"
+                                                class="trucated-text">{{ $data->buku->judul }}</a>
+                                        </td>
+                                        <td>{{ $data->tgl_pinjam }}</td>
+                                        <td>
+                                            {{ $data->tgl_kembali }}</td>
+                                        <td>{{ $data->petugas->name }}</td>
+                                        <td>
                                             <div class="d-flex gap-1">
                                                 <a href="{{ url('peminjaman/delete/' . $data->id) }}"
                                                     class="badge border-danger border" onclick="confirm(event)"><i
                                                         class='bx bxs-trash text-danger'></i></a>
                                                 <button type="button" class="badge bg-light border-warning border"
                                                     data-bs-toggle="modal" data-bs-target="#updatePeminjaman"
-                                                    data-siswa="{{ $data }}">
+                                                    data-peminjaman="{{ $data }}">
                                                     <span class="fw-semibold"><i
                                                             class="bx bxs-edit text-warning"></i></span>
                                                 </button>
+                                                <a href="{{ url('peminjaman/kembali/' . $data->id_pinjam) }}"
+                                                    class="badge {{ !$data->status ? 'border-primary' : 'border-success' }} border"
+                                                    @if (!$data->status) onclick="confirmKembali(event)" @else onclick="confirmComplete(event)" @endif><i
+                                                        class='{{ !$data->status ? 'bx bx-repeat text-primary' : 'bx bx-check text-success' }}  fw-semibold'></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -55,69 +64,50 @@
 
                                     {{-- modal update --}}
 
-                                    {{-- <x-modal modalTitle="Update Siswa" modalID="updatePeminjaman" btn="Update"
-                                        action="" method="POST">
 
+                                    <x-modal modalTitle="Update Siswa" modalID="updatePeminjaman" btn="Update"
+                                        action="" method="POST" enctype="">
+
+                                        <div class="row mb-3">
+                                            <label class="mb-2 required">Siswa</label>
+                                            <div class="col-sm-12">
+                                                <select class="" name="siswa_id" id="siswa_id">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="mb-2 required">Buku</label>
+                                            <div class="col-sm-12">
+                                                <select class=" " name="buku_id" id="buku_id">
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="row mb-3">
                                             <div class="input-group justify-content-between">
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
-                                                    <label for="name"
-                                                        class="col-sm-6 col-form-label required">Nama</label>
-                                                    <input type="text" id="name" class="form-control "
-                                                        name="name" placeholder="Masukkan Nama">
+                                                    <label for="tgl_pinjam" class="col-form-label required">Tanggal
+                                                        Pinjam</label>
+                                                    <input type="date" id="tgl_pinjam" class="form-control "
+                                                        name="tgl_pinjam" placeholder="Masukkan Nama">
                                                 </div>
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
-                                                    <label for="username"
-                                                        class="col-sm-6 col-form-label required">Username</label>
-                                                    <input type="text" id="username" class="form-control "
-                                                        name="username" placeholder="Masukkan Username">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="input-group col-sm-6 justify-content-between">
-                                                <div class="input-box col-sm-6" style="max-width: 48%">
-                                                    <label for="email"
-                                                        class="col-sm-6 col-form-label required">Email</label>
-                                                    <input type="email" id="email" class="form-control" disabled
-                                                        placeholder="Masukkan Email">
-                                                </div>
-                                                <div class="input-box col-sm-6" style="max-width: 48%">
-                                                    <label class="col-sm-6 col-form-label required">Password</label>
-                                                    <input type="password" disabled class="form-control"
-                                                        placeholder="Masukkan Password">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <label class="mb-2 required">Kelas</label>
-                                            <div class="col-sm-12">
-                                                <select id="kelas_id" class="form-select " name="kelas_id">
-                                                    <option selected value="">- Pilih kelas -</option>
-                                                </select>
-
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="input-group col-sm-6 justify-content-between">
-                                                <div class="input-box col-sm-6" style="max-width: 48%">
-                                                    <label for="nis" class="col-sm-2">NIS</label>
-                                                    <input type="text" id="nis" class="form-control"
-                                                        name="nis" placeholder="Masukkan NIS">
-
-                                                </div>
-                                                <div class="input-box col-sm-6" style="max-width: 48%">
-                                                    <label for="inputNumber" class="">Foto Profil</label>
-                                                    <input class="form-control" type="file" id="formFile">
+                                                    <label for="tgl_kembali" class="col-form-label required">Tanggal
+                                                        Kembali</label>
+                                                    <input type="date" id="tgl_kembali" class="form-control "
+                                                        name="tgl_kembali" placeholder="Masukkan Nama">
                                                 </div>
                                             </div>
                                         </div>
 
 
-                                    </x-modal> --}}
+                                    </x-modal>
+
+
 
                                     {{-- modal update --}}
                                 @endforeach
+
+
 
                             </tbody>
                         </table>
@@ -127,30 +117,44 @@
         </div>
     </div>
 
-    {{-- Select data kelas --}}
-    {{-- <script>
-        $(document).ready(function() {
-            let kelasData =
-                @json($kelas);
-            let kelasSelect = $("#kelas_id");
 
-            $.each(kelasData, function(index, kelas) {
-                kelasSelect.append("<option value='" + kelas.id + "'>" + kelas.nama_kelas + "</option>");
+    {{-- Select data buku --}}
+    <script>
+        $(document).ready(function() {
+            let dataBuku = @json($buku);
+            let bukuSelect = $("#buku_id");
+
+            $.each(dataBuku, function(index, buku) {
+                bukuSelect.append("<option value='" + buku.id + "'>" + buku.judul + "</option>");
             });
+
         });
-    </script> --}}
-    {{-- Select data kelas --}}
+    </script>
+    {{-- Select data buku --}}
+
+    {{-- Select data siswa --}}
+    <script>
+        $(document).ready(function() {
+            let dataSiswa = @json($siswa);
+            let siswaSelect = $("#siswa_id");
+
+            $.each(dataSiswa, function(index, siswa) {
+                siswaSelect.append("<option value='" + siswa.id + "'>" + siswa.name + "</option>");
+            });
+
+        });
+    </script>
+    {{-- Select data siswa --}}
 
     {{-- Modal Tambah Peminjaman --}}
 
     <x-modal modalTitle="Tambah Peminjaman" modalID="addPeminjaman" btn="Tambah" action="{{ url('peminjaman') }}"
-        method="POST">
-
-
+        method="POST" enctype="">
         <div class="row mb-3">
             <label class="mb-2 required">Siswa</label>
-            <div class="col-sm-12">
-                <select class="form-select @error('siswa_id') is-invalid @enderror required" name="siswa_id">
+            <div class="col-sm-12 ">
+                <select class="form-select select2AddSiswaPeminjaman @error('siswa_id') is-invalid @enderror "
+                    name="siswa_id">
                     <option selected value="">- Pilih Siswa -</option>
                     @foreach ($siswa as $siswa)
                         <option value="{{ $siswa->id }}" @if (old('siswa_id') == $siswa->id) selected @endif>
@@ -166,8 +170,9 @@
         </div>
         <div class="row mb-3">
             <label class="mb-2 required">Buku</label>
-            <div class="col-sm-12">
-                <select class="form-select @error('buku_id') is-invalid @enderror required" name="buku_id">
+            <div class="col-sm-12 ">
+                <select class=" form-select select2AddBukuPeminjaman @error('buku_id') is-invalid @enderror "
+                    name="buku_id">
                     <option selected value="">- Pilih Buku -</option>
                     @foreach ($buku as $buku)
                         <option value="{{ $buku->id }}" @if (old('buku_id') == $buku->id) selected @endif>
@@ -185,8 +190,9 @@
             <div class="input-group justify-content-between">
                 <div class="input-box col-sm-6" style="max-width: 48%">
                     <label for="tgl_pinjam" class="col-form-label required">Tanggal Pinjam</label>
-                    <input type="date" id="tgl_pinjam" class="form-control @error('tgl_pinjam') is-invalid @enderror"
-                        name="tgl_pinjam" placeholder="Masukkan Nama" value="{{ old('tgl_pinjam', date('Y-m-d')) }}">
+                    <input type="date" id="tgl_pinjam"
+                        class="form-control @error('tgl_pinjam') is-invalid @enderror" name="tgl_pinjam"
+                        placeholder="Masukkan Nama" value="{{ old('tgl_pinjam', date('Y-m-d')) }}">
                     @error('tgl_pinjam')
                         <div class="invalid-feedback">
                             {{ $message }}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Buku;
 use App\Models\Rak;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -64,6 +65,13 @@ class BukuController extends Controller
 
         $slug = Str::slug($request->judul);
 
+        if ($request->file('image')) {
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $image = $request->file('image')->store('book-image');
+        }
+
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput()->with('addBuku', 'Gagal Menambah Buku');
         }
@@ -82,6 +90,7 @@ class BukuController extends Controller
             'jumlah' => $request->input('jumlah'),
             'bahasa' => $request->input('bahasa'),
             'halaman' => $request->input('halaman'),
+            'image' => $image,
         ]);
 
         return redirect('/buku')->with('success', 'Berhasil Menambah Buku');
@@ -145,6 +154,14 @@ class BukuController extends Controller
 
         $slug = Str::slug($request->judul);
 
+        $image = $request->oldImage;
+        if ($request->file('image')) {
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $image = $request->file('image')->store('book-image');
+        }
+
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput()->with('updateBuku', 'Gagal Update Buku');
         }
@@ -163,6 +180,7 @@ class BukuController extends Controller
             'jumlah' => $request->input('jumlah'),
             'bahasa' => $request->input('bahasa'),
             'halaman' => $request->input('halaman'),
+            'image' => $image,
         ]);
 
         return redirect('/buku')->with('success', 'Berhasil Update Buku');

@@ -74,31 +74,30 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="users-profile.html">
+            <a class="nav-link collapsed {{ Request::is('pengembalian') ? 'active' : '' }}"
+                href="{{ url('pengembalian') }}">
                 <i class="bi bi-repeat"></i>
                 <span>Data Pengembalian</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed {{ Request::is('denda') ? 'active' : '' }}" href="{{ url('denda') }}">
+                <i class="bi bi-exclamation-circle"></i>
+                <span>Data Denda</span>
+            </a>
         </li><!-- End Katalog Buku -->
 
         <li class="nav-heading">Setting</li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="users-profile.html">
+            <a class="nav-link collapsed {{ Request::is('profile') ? 'active' : '' }}" href="{{ url('profile') }}">
                 <i class="bi bi-person"></i>
                 <span>Profile</span>
             </a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Setting</span>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-login.html">
+            <a class="nav-link collapsed" href="{{ url('/logout') }}" onclick="confirmLogout(event)">
                 <i class="bi bi-box-arrow-in-right"></i>
                 <span>Sign Out</span>
             </a>

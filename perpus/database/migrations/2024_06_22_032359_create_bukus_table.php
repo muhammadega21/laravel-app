@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer('jumlah');
             $table->string('bahasa', 30)->nullable();
             $table->integer('halaman')->nullable();
-            $table->string('image')->default('buku.png');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

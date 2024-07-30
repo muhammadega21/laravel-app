@@ -1,10 +1,20 @@
+@if (Auth()->user()->role == 1)
+    @php
+        $data = Auth()->user()->petugas;
+    @endphp
+@else
+    @php
+        $data = Auth()->user()->siswa;
+    @endphp
+@endif
+
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
         <a href="{{ url('/') }}" class="logo d-flex gap-2 align-items-center">
             <span class="d-none d-lg-block">Perpus Sekolah</span>
-            <img src="{{ asset('img/logo.png?v=' . time()) }}" alt="">
+            <img src="{{ asset('img/logo.png') }}" alt="">
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -91,15 +101,17 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="{{ asset('img/profile-img.png?v=' . time()) }}" alt="Profile" class="rounded-circle">
-                    <span
-                        class="d-none d-md-block dropdown-toggle ps-2">{{ auth()->user()->role == 3 ? auth()->user()->siswa->username : auth()->user()->petugas->username }}</span>
+                    <div class="rounded-circle overflow-hidden" style="width: 35px; height: 35px;">
+                        <img src="{{ asset(!$data->image ? 'img/user.png' : 'storage/' . $data->image) }}"
+                            alt="Profile" class="w-100 h-100 object-fit-cover">
+                    </div>
+                    <span class="d-none d-md-block dropdown-toggle ps-2">{{ $data->username }}</span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                        <h6>Muhammad Ega Dermawan</h6>
-                        <span>Administrator</span>
+                        <h6>{{ $data->name }}</h6>
+                        <span>{{ Auth()->user()->role == 1 ? 'Administrator' : (Auth()->user()->role == 2 ? 'Petugas' : 'Siswa') }}</span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
@@ -126,7 +138,8 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ url('/logout') }}">
+                        <a class="dropdown-item d-flex align-items-center" href="{{ url('/logout') }}"
+                            onclick="confirmLogout(event)">
                             <i class="bi bi-box-arrow-right"></i>
                             <span>Sign Out</span>
                         </a>

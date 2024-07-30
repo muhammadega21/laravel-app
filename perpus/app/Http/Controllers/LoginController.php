@@ -47,7 +47,7 @@ class LoginController extends Controller
 
             'name.required' => 'Nama Tidak Boleh Kosong!',
             'name.unique' => 'Nama Sudah Ada!',
-            'name.max' => 'Max 30 Character!',
+            'name.max' => 'Nama Maksimal 30 Character!',
 
             'email.required' => 'Email Tidak Boleh Kosong!',
             'email.email' => 'Email Harus Berupa Email Yang Benar!',

@@ -7,7 +7,7 @@
                         <div class="form-input d-flex justify-content-end">
                             <input type="text" id="searchInput" placeholder="Search...">
                         </div>
-                        <table class="table table-borderless mt-4" id="dataTable">
+                        <table class="table table-bordered  mt-4" id="dataTable">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -23,13 +23,14 @@
 
                                         <td>
                                             <a href="{{ url('daftar_buku/' . $data->slug) }}">
-                                                <img width="50" src="{{ asset('img/' . $data->image) }}"
+                                                <img width="50"
+                                                    src="{{ asset(!$data->image ? 'img/buku.png' : 'storage/' . $data->image) }}"
                                                     alt="{{ $data->judul }}" class="cover border">
                                             </a>
                                         </td>
                                         <td class="align-middle">
                                             <a href="{{ url('daftar_buku/' . $data->slug) }}"
-                                                class="text-primary fw-semibold">{{ $data->judul }}</a>
+                                                class="text-primary fw-semibold trucated-text">{{ $data->judul }}</a>
                                         </td>
                                         <td class="align-middle text-nowrap">{{ $data->rak->nama_rak }}</td>
                                     </tr>

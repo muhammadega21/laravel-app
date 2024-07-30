@@ -50,7 +50,7 @@
                                     {{-- modal update --}}
 
                                     <x-modal modalTitle="Update Kelas" modalID="updateKelas" btn="Update"
-                                        action="" method="POST">
+                                        action="" method="POST" enctype="">
 
                                         <div class="row mb-3">
                                             <div class="input-group justify-content-between">
@@ -87,7 +87,7 @@
         </div>
     </div>
 
-    <x-modal modalTitle="Tambah Kelas" modalID="addKelas" btn="Tambah" action="{{ url('kelas') }}" method="POST">
+    <x-modal modalTitle="Tambah Kelas" modalID="addKelas" btn="Tambah" action="{{ url('kelas') }}" method="POST"="enctype>
         <div class="row mb-3">
             <div class="input-group d-flex justify-content-between flex-column flex-sm-row">
                 <div class="input-box mb-3" style="max-width: @media('sm') ? '48%' : ''">
@@ -96,10 +96,10 @@
                         class="form-control  @error('nama_kelas') is-invalid @enderror" name="nama_kelas"
                         placeholder="Masukkan Nama" value="{{ old('nama_kelas') }}">
                     @error('nama_kelas')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
+    <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+@enderror
                 </div>
                 <div class="input-box col-sm-6" style="@media('sm') ? 'max-width: 48%' : ''">
                     <label class="mb-2 required">Kelas</label>
@@ -110,10 +110,10 @@
                             <option value="0">Tidak Aktif</option>
                         </select>
                         @error('status')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+    <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+@enderror
                     </div>
                 </div>
             </div>
@@ -122,44 +122,44 @@
 
 
     {{-- Modal Error --}}
-    @if (session('addKelas'))
+     @if (session('addKelas'))
         <script>
             toastr.error("{{ Session::get('addKelas') }}");
             $(document).ready(function() {
                 $('#addKelas').modal('show');
             });
         </script>
-    @endif
+        @endif
 
 
-    @if (session('updateKelas'))
-        <script>
-            swal("Error!", "{{ Session::get('updateKelas') }}", "error"), {
-                button: true,
-                button: 'ok'
-            }
-            @foreach ($errors->all() as $error)
-                toastr.error("{{ $error }}");
-            @endforeach
-        </script>
-    @endif
+        @if (session('updateKelas'))
+            <script>
+                swal("Error!", "{{ Session::get('updateKelas') }}", "error"), {
+                    button: true,
+                    button: 'ok'
+                }
+                @foreach ($errors->all() as $error)
+                    toastr.error("{{ $error }}");
+                @endforeach
+            </script>
+        @endif
 
-    {{-- Alert --}}
-    @if (Session::has('success'))
-        <script>
-            swal("Success!", "{{ Session::get('success') }}", "success"), {
-                button: true,
-                button: 'ok'
-            }
-        </script>
-    @elseif (Session::has('error'))
-        <script>
-            swal("Error!", "{{ Session::get('error') }}", "error"), {
-                button: true,
-                button: 'ok'
-            }
-        </script>
-    @endif
+        {{-- Alert --}}
+        @if (Session::has('success'))
+            <script>
+                swal("Success!", "{{ Session::get('success') }}", "success"), {
+                    button: true,
+                    button: 'ok'
+                }
+            </script>
+        @elseif (Session::has('error'))
+            <script>
+                swal("Error!", "{{ Session::get('error') }}", "error"), {
+                    button: true,
+                    button: 'ok'
+                }
+            </script>
+        @endif
 
 
 

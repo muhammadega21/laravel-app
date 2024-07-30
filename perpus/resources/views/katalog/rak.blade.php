@@ -49,7 +49,7 @@
                                     {{-- modal update --}}
 
                                     <x-modal modalTitle="Update Buku" modalID="updateRak" btn="Update" action=""
-                                        method="POST">
+                                        method="POST" enctype="">
 
                                         <div class="row mb-3">
                                             <label for="nama_rak" class="col-sm-5 mb-2 required">Nama Rak</label>
@@ -79,7 +79,8 @@
         </div>
     </div>
 
-    <x-modal modalTitle="Tambah Rak" modalID="addRak" btn="Tambah" action="{{ url('rak') }}" method="POST">
+    <x-modal modalTitle="Tambah Rak" modalID="addRak" btn="Tambah" action="{{ url('rak') }}" method="POST"
+        enctype="">
         <div class="row mb-3">
             <label for="nama_rak" class="col-sm-5 mb-2 required">Nama Rak</label>
             <div class="input-box col-sm-12">

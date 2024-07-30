@@ -31,3 +31,38 @@ a {
     border: 1px solid rgba(0, 0, 0, 0.5);
     padding: 6px 12px;
 }
+
+.trucated-text {
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.confirmKembali .swal-button--confirm {
+    background-color: #0d6efd;
+}
+
+.confirmKembali .swal-button--confirm:hover {
+    background-color: #0b5ed7;
+}
+
+.selectize.is-invalid {
+    border: 1px solid #dc3545;
+    box-shadow: 0 0 2px #dc3545;
+    border-radius: 4px;
+}
+
+.profile-img {
+    border-radius: 100%;
+    width: 50vw;
+    height: 50vw;
+    max-width: 200px;
+    max-height: 200px;
+    overflow: hidden;
+}
+
+.profile-img img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}

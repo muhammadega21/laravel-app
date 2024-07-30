@@ -29,7 +29,7 @@
                                 @foreach ($datas as $data)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $data->judul }}</td>
+                                        <td><span class="trucated-text">{{ $data->judul }}</span></td>
                                         <td class="text-nowrap">{{ $data->isbn }}</td>
                                         <td class="text-nowrap">{{ $data->rak->id_rak }}</td>
                                         <td class="text-nowrap">{{ $data->rak->nama_rak }}</td>
@@ -57,7 +57,7 @@
                                     {{-- modal update --}}
 
                                     <x-modal modalTitle="Update Buku" modalID="updateBuku" btn="Update" action=""
-                                        method="POST">
+                                        method="POST" enctype="multipart/form-data">
 
                                         <div class="row mb-3">
                                             <div class="input-group justify-content-between">
@@ -77,20 +77,22 @@
                                             <div class="input-group justify-content-between mt-3">
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
                                                     <label for="jumlah" class="col-sm-5 mb-2 required">Jumlah</label>
-                                                    <input type="text" id="jumlah" class="form-control "
-                                                        name="jumlah" placeholder="Masukkan Nama">
+                                                    <input type="text" inputmode="numeric" id="jumlah"
+                                                        class="form-control " name="jumlah"
+                                                        placeholder="Masukkan Nama">
 
                                                 </div>
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
-                                                    <label for="formFile" class="col-sm-6 mb-2">Sampul Buku</label>
-                                                    <input class="form-control" type="file" id="formFile">
+                                                    <label for="image" class="col-sm-6 mb-2">Sampul Buku</label>
+                                                    <input class="form-control" type="file" id="image"
+                                                        name="image">
+                                                    <input type="hidden" name="oldImage" id="oldImage">
                                                 </div>
                                             </div>
                                             <div class="input-group justify-content-between mt-3">
                                                 <div class="input-box col-12">
                                                     <label class="mb-2 required">Rak</label>
-                                                    <select id="rak_id" class="form-select" name="rak_id">
-                                                        <option selected value="">- Pilih Rak -</option>
+                                                    <select id="rak_id" class="" name="rak_id">
                                                     </select>
 
                                                 </div>
@@ -177,7 +179,8 @@
     {{-- Select data rak --}}
 
     {{-- Modal Tambah Buku --}}
-    <x-modal modalTitle="Tambah Buku" modalID="addBuku" btn="Tambah" action="{{ url('buku') }}" method="POST">
+    <x-modal modalTitle="Tambah Buku" modalID="addBuku" btn="Tambah" action="{{ url('buku') }}" method="POST"
+        enctype="multipart/form-data">
         <div class="row mb-3">
             <div class="input-group justify-content-between">
                 <div class="input-box col-sm-6" style="max-width: 48%">
@@ -204,8 +207,9 @@
             <div class="input-group justify-content-between mt-3">
                 <div class="input-box col-sm-6" style="max-width: 48%">
                     <label for="jumlah" class="col-sm-5 mb-2 required">Jumlah</label>
-                    <input type="text" id="jumlah" class="form-control @error('jumlah') is-invalid @enderror"
-                        name="jumlah" placeholder="Masukkan Nama" value="{{ old('jumlah') }}">
+                    <input type="text" inputmode="numeric" id="jumlah"
+                        class="form-control @error('jumlah') is-invalid @enderror" name="jumlah"
+                        placeholder="Masukkan Nama" value="{{ old('jumlah') }}">
                     @error('jumlah')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -213,14 +217,16 @@
                     @enderror
                 </div>
                 <div class="input-box col-sm-6" style="max-width: 48%">
-                    <label for="formFile" class="col-sm-6 mb-2">Sampul Buku</label>
-                    <input class="form-control" type="file" id="formFile">
+                    <label for="image" class="col-sm-6 mb-2">Sampul Buku</label>
+                    <input class="form-control" type="file" id="image" name="image">
+
                 </div>
             </div>
-            <div class="input-group justify-content-between mt-3">
+            <div class="mt-3">
                 <div class="input-box col-sm-12">
                     <label class="mb-2 required">Rak</label>
-                    <select class="form-select
+                    <select
+                        class="form-select select2AddRak 
                         @error('rak_id') is-invalid @enderror"
                         name="rak_id">
                         <option selected value="">- Pilih Rak -</option>

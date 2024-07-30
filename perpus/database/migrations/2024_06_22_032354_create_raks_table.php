@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('raks', function (Blueprint $table) {
             $table->id();
-            $table->char('id_rak');
+            $table->char('id_rak', 4);
             $table->string('nama_rak', 20);
             $table->text('keterangan')->nullable();
             $table->timestamps();

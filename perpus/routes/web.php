@@ -1,11 +1,14 @@
 <?php
 
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\DendaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RakController;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
@@ -56,3 +59,21 @@ Route::post('rak/update/{id}', [RakController::class, 'update'])->middleware('au
 Route::resource('peminjaman', PeminjamanController::class)->middleware('auth');
 Route::get('peminjaman/delete/{slug}', [PeminjamanController::class, 'destroy'])->middleware('auth');
 Route::post('peminjaman/update/{id}', [PeminjamanController::class, 'update'])->middleware('auth');
+Route::get('peminjaman/kembali/{id_pinjam}', [PeminjamanController::class, 'pengembalian'])->middleware('auth');
+
+// Pengembalian
+Route::resource('pengembalian', PengembalianController::class)->middleware('auth');
+Route::get('pengembalian/delete/{slug}', [PengembalianController::class, 'destroy'])->middleware('auth');
+Route::post('pengembalian/update/{id}', [PengembalianController::class, 'update'])->middleware('auth');
+
+// Denda
+Route::resource('denda', DendaController::class)->middleware('auth');
+Route::get('denda/delete/{id_denda}', [DendaController::class, 'destroy'])->middleware('auth');
+Route::post('denda/update/{id_denda}', [DendaController::class, 'update'])->middleware('auth');
+Route::get('denda/bayar/{id_denda}', [DendaController::class, 'bayar_denda'])->middleware('auth');
+
+// Profile
+Route::controller(ProfileController::class)->group(function () {
+    Route::get('/profile', 'index')->middleware('auth');
+    Route::post('/profile/update', 'update')->middleware('auth');
+});

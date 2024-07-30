@@ -16,11 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('siswa_id');
             $table->unsignedBigInteger('petugas_id');
             $table->unsignedBigInteger('buku_id');
-            $table->unsignedBigInteger('denda_id');
             $table->foreign('siswa_id')->references('id')->on('siswas');
             $table->foreign('petugas_id')->references('id')->on('petugas');
             $table->foreign('buku_id')->references('id')->on('bukus');
-            $table->foreign('denda_id')->references('id')->on('dendas');
+            $table->char('id_kembali', 6);
             $table->date('tgl_kembali');
             $table->timestamps();
         });

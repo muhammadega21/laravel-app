@@ -15,4 +15,9 @@ class Buku extends Model
     {
         return $this->belongsTo(Rak::class);
     }
+
+    public function denda()
+    {
+        return $this->hasOne(Denda::class);
+    }
 }

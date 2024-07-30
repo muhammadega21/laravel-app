@@ -29,7 +29,18 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
+            'email' => 'fahmiabdul44@gmail.com',
+            'password' => bcrypt('admin'),
+            'role' => 1
+        ]);
+
+        User::create([
             'email' => 'dermawane988@gmail.com',
+            'password' => bcrypt('12345'),
+        ]);
+
+        User::create([
+            'email' => 'faizal123@gmail.com',
             'password' => bcrypt('12345'),
         ]);
 
@@ -45,12 +56,27 @@ class DatabaseSeeder extends Seeder
             'name' => 'Administrator',
         ]);
 
+        Petugas::create([
+            'id_petugas' => 'A002',
+            'user_id' => 2,
+            'username' => 'Fahmi',
+            'name' => 'Fahmi Abdul Aziz',
+        ]);
+
         Siswa::create([
             'id_siswa' => 'S001',
-            'user_id' => 2,
+            'user_id' => 3,
             'username' => 'Ega',
             'name' => 'Muhammad Ega Dermawan',
             'nis' => '111',
+            'kelas_id' => 1
+        ]);
+        Siswa::create([
+            'id_siswa' => 'S002',
+            'user_id' => 4,
+            'username' => 'Faizal',
+            'name' => 'Muhammad Faizal',
+            'nis' => '12345',
             'kelas_id' => 1
         ]);
 
@@ -72,7 +98,7 @@ class DatabaseSeeder extends Seeder
             'jumlah' => 70,
             'bahasa' => 'Indonesia',
             'halaman' => 150,
-            'isbn' => '9786022415602'
+            'isbn' => '9786022415602',
         ]);
     }
 }

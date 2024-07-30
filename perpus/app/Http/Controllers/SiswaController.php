@@ -126,14 +126,14 @@ class SiswaController extends Controller
 
         $validator = Validator::make($request->all(), $rules, [
             'name.required' => 'Nama Tidak Boleh Kosong!',
-            'name.max' => 'Max 30 Karakter!',
+            'name.max' => 'Nama Maksimal 30 Karakter!',
 
             'username.required' => 'Username Tidak Boleh Kosong!',
             'username.max' => 'Username Maksimal 8 Karakter!',
 
             'kelas_id.required' => 'Kelas Tidak Boleh Kosong!',
 
-            'nis.max' => 'Max 10 Karakter!',
+            'nis.max' => 'NIS Maksimal 10 Karakter!',
             'nis.unique' => 'NIS Sudah Ada!'
         ]);
 

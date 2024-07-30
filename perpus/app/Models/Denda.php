@@ -9,4 +9,20 @@ class Denda extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $with = ['siswa', 'buku', 'pengembalian'];
+
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa::class);
+    }
+
+    public function buku()
+    {
+        return $this->belongsTo(Buku::class);
+    }
+
+    public function pengembalian()
+    {
+        return $this->belongsTo(Pengembalian::class);
+    }
 }

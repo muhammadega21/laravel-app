@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('peminjamen', function (Blueprint $table) {
+        Schema::create('peminjamans', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('siswa_id');
             $table->unsignedBigInteger('petugas_id');
@@ -19,9 +19,10 @@ return new class extends Migration
             $table->foreign('siswa_id')->references('id')->on('siswas');
             $table->foreign('petugas_id')->references('id')->on('petugas');
             $table->foreign('buku_id')->references('id')->on('bukus');
-            $table->char('id_pinjam', 4)->nullable();
+            $table->char('id_pinjam', 6);
             $table->date('tgl_pinjam');
             $table->date('tgl_kembali');
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('peminjamen');
+        Schema::dropIfExists('peminjamans');
     }
 };
