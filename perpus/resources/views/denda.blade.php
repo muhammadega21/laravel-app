@@ -65,7 +65,7 @@
                                     {{-- modal update --}}
 
                                     <x-modal modalTitle="Update Siswa" modalID="updateDenda" btn="Update"
-                                        action="" method="POST" enctype="">
+                                        action="" method="POST" enctype="" method2="PUT">
                                         <div class="row mb-3">
                                             <label class="mb-2 required">ID Pengembalian</label>
                                             <div class="col-sm-12">
@@ -106,7 +106,7 @@
     {{-- Modal Tambah Denda --}}
 
     <x-modal modalTitle="Tambah Denda" modalID="addDenda" btn="Tambah" action="{{ url('denda') }}" method="POST"
-        enctype="">
+        enctype="" method2="POST">
         <div class="row mb-3">
             <label class="mb-2 required">ID Pengembalian</label>
             <div class="col-sm-12">

@@ -66,7 +66,7 @@
 
 
                                     <x-modal modalTitle="Update Siswa" modalID="updatePeminjaman" btn="Update"
-                                        action="" method="POST" enctype="">
+                                        action="" method="POST" enctype="" method2="PUT">
 
                                         <div class="row mb-3">
                                             <label class="mb-2 required">Siswa</label>
@@ -149,7 +149,7 @@
     {{-- Modal Tambah Peminjaman --}}
 
     <x-modal modalTitle="Tambah Peminjaman" modalID="addPeminjaman" btn="Tambah" action="{{ url('peminjaman') }}"
-        method="POST" enctype="">
+        method="POST" enctype="" method2="POST">
         <div class="row mb-3">
             <label class="mb-2 required">Siswa</label>
             <div class="col-sm-12 ">

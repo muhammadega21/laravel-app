@@ -7,6 +7,7 @@
             </div>
             <form action="{{ $action }}" method="{{ $method }}" enctype="{{ $enctype }}">
                 @csrf
+                @method($method2)
                 <div class="modal-body">
                     {{ $slot }}
                 </div>

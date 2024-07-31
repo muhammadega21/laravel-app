@@ -57,7 +57,7 @@
                                     {{-- modal update --}}
 
                                     <x-modal modalTitle="Update Buku" modalID="updateBuku" btn="Update" action=""
-                                        method="POST" enctype="multipart/form-data">
+                                        method="POST" enctype="multipart/form-data" method2="PUT">
 
                                         <div class="row mb-3">
                                             <div class="input-group justify-content-between">
@@ -65,12 +65,12 @@
                                                     <label for="judul" class="col-sm-5 mb-2 required">Judul
                                                         Buku</label>
                                                     <input type="text" id="judul" class="form-control"
-                                                        name="judul" placeholder="Masukkan Nama">
+                                                        name="judul" placeholder="Masukkan Judul">
                                                 </div>
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
                                                     <label for="isbn" class="col-sm-5 mb-2">ISBN</label>
                                                     <input type="text" id="isbn" class="form-control"
-                                                        name="isbn" placeholder="Masukkan Nama">
+                                                        name="isbn" placeholder="Masukkan ISBN">
 
                                                 </div>
                                             </div>
@@ -79,7 +79,7 @@
                                                     <label for="jumlah" class="col-sm-5 mb-2 required">Jumlah</label>
                                                     <input type="text" inputmode="numeric" id="jumlah"
                                                         class="form-control " name="jumlah"
-                                                        placeholder="Masukkan Nama">
+                                                        placeholder="Masukkan Jumlah">
 
                                                 </div>
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
@@ -101,26 +101,26 @@
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
                                                     <label for="bahasa" class="col-sm-6 mb-2">Bahasa Buku</label>
                                                     <input type="text" id="bahasa" class="form-control "
-                                                        name="bahasa" placeholder="Masukkan Nama">
+                                                        name="bahasa" placeholder="Masukkan Bahasa">
 
                                                 </div>
                                                 <div class="input-box col-sm-6" style="max-width: 48%">
                                                     <label for="halaman" class="col-sm-5 mb-2">Halaman</label>
                                                     <input type="text" id="halaman" class="form-control "
-                                                        name="halaman" placeholder="Masukkan Nama">
+                                                        name="halaman" placeholder="Masukkan Halaman">
 
                                                 </div>
                                                 <div class="input-group justify-content-between mt-3">
                                                     <div class="input-box col-sm-6" style="max-width: 48%">
                                                         <label for="pengarang" class="col-sm-5 mb-2">Pengarang</label>
                                                         <input type="text" id="pengarang" class="form-control "
-                                                            name="pengarang" placeholder="Masukkan Nama">
+                                                            name="pengarang" placeholder="Masukkan Pengarang">
 
                                                     </div>
                                                     <div class="input-box col-sm-6" style="max-width: 48%">
                                                         <label for="penerbit" class="col-sm-5 mb-2">Penerbit</label>
                                                         <input type="text" id="penerbit" class="form-control"
-                                                            name="penerbit" placeholder="Masukkan Nama">
+                                                            name="penerbit" placeholder="Masukkan Penerbit">
 
                                                     </div>
                                                 </div>
@@ -129,7 +129,7 @@
                                                         <label for="tahun_terbit" class="col-sm-6 mb-2">Tahun
                                                             Terbit</label>
                                                         <input type="text" id="tahun_terbit" class="form-control"
-                                                            name="tahun_terbit" placeholder="Masukkan Nama">
+                                                            name="tahun_terbit" placeholder="Masukkan Tahun Terbit">
 
                                                     </div>
                                                     <div class="input-box col-sm-6" style="max-width: 48%">
@@ -137,7 +137,7 @@
                                                             Terbit</label>
                                                         <input type="text" id="tempat_terbit"
                                                             class="form-control " name="tempat_terbit"
-                                                            placeholder="Masukkan Nama">
+                                                            placeholder="Masukkan Tempat Terbit">
 
                                                     </div>
                                                     <div class="input-group justify-content-between mt-3">
@@ -180,13 +180,13 @@
 
     {{-- Modal Tambah Buku --}}
     <x-modal modalTitle="Tambah Buku" modalID="addBuku" btn="Tambah" action="{{ url('buku') }}" method="POST"
-        enctype="multipart/form-data">
+        enctype="multipart/form-data" method2="POST">
         <div class="row mb-3">
             <div class="input-group justify-content-between">
                 <div class="input-box col-sm-6" style="max-width: 48%">
                     <label for="judul" class="col-sm-5 mb-2 required">Judul Buku</label>
                     <input type="text" id="judul" class="form-control @error('judul') is-invalid @enderror"
-                        name="judul" placeholder="Masukkan Nama" value="{{ old('judul') }}">
+                        name="judul" placeholder="Masukkan Judul" value="{{ old('judul') }}">
                     @error('judul')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -196,7 +196,7 @@
                 <div class="input-box col-sm-6" style="max-width: 48%">
                     <label for="isbn" class="col-sm-5 mb-2">ISBN</label>
                     <input type="text" id="isbn" class="form-control @error('isbn') is-invalid @enderror"
-                        name="isbn" placeholder="Masukkan Nama" value="{{ old('isbn') }}">
+                        name="isbn" placeholder="Masukkan ISBN" value="{{ old('isbn') }}">
                     @error('isbn')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -209,7 +209,7 @@
                     <label for="jumlah" class="col-sm-5 mb-2 required">Jumlah</label>
                     <input type="text" inputmode="numeric" id="jumlah"
                         class="form-control @error('jumlah') is-invalid @enderror" name="jumlah"
-                        placeholder="Masukkan Nama" value="{{ old('jumlah') }}">
+                        placeholder="Masukkan Jumlah" value="{{ old('jumlah') }}">
                     @error('jumlah')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -246,7 +246,7 @@
                 <div class="input-box col-sm-6" style="max-width: 48%">
                     <label for="bahasa" class="col-sm-6 mb-2">Bahasa Buku</label>
                     <input type="text" id="bahasa" class="form-control @error('bahasa') is-invalid @enderror"
-                        name="bahasa" placeholder="Masukkan Nama" value="{{ old('bahasa') }}">
+                        name="bahasa" placeholder="Masukkan Bahasa" value="{{ old('bahasa') }}">
                     @error('bahasa')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -256,7 +256,7 @@
                 <div class="input-box col-sm-6" style="max-width: 48%">
                     <label for="halaman" class="col-sm-5 mb-2">Halaman</label>
                     <input type="text" id="halaman" class="form-control @error('halaman') is-invalid @enderror"
-                        name="halaman" placeholder="Masukkan Nama" value="{{ old('halaman') }}">
+                        name="halaman" placeholder="Masukkan Halaman" value="{{ old('halaman') }}">
                     @error('halaman')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -268,7 +268,7 @@
                         <label for="pengarang" class="col-sm-5 mb-2">Pengarang</label>
                         <input type="text" id="pengarang"
                             class="form-control @error('pengarang') is-invalid @enderror" name="pengarang"
-                            placeholder="Masukkan Nama" value="{{ old('pengarang') }}">
+                            placeholder="Masukkan Pengarang" value="{{ old('pengarang') }}">
                         @error('pengarang')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -279,7 +279,7 @@
                         <label for="penerbit" class="col-sm-5 mb-2">Penerbit</label>
                         <input type="text" id="penerbit"
                             class="form-control @error('penerbit') is-invalid @enderror" name="penerbit"
-                            placeholder="Masukkan Nama" value="{{ old('penerbit') }}">
+                            placeholder="Masukkan Penerbit" value="{{ old('penerbit') }}">
                         @error('penerbit')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -292,7 +292,7 @@
                         <label for="tahun_terbit" class="col-sm-6 mb-2">Tahun Terbit</label>
                         <input type="text" id="tahun_terbit"
                             class="form-control @error('tahun_terbit') is-invalid @enderror" name="tahun_terbit"
-                            placeholder="Masukkan Nama" value="{{ old('tahun_terbit') }}">
+                            placeholder="Masukkan Tahun Terbit" value="{{ old('tahun_terbit') }}">
                         @error('tahun_terbit')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -303,7 +303,7 @@
                         <label for="tempat_terbit" class="col-sm-6 mb-2">Tempat Terbit</label>
                         <input type="text" id="tempat_terbit"
                             class="form-control @error('tempat_terbit') is-invalid @enderror" name="tempat_terbit"
-                            placeholder="Masukkan Nama" value="{{ old('tempat_terbit') }}">
+                            placeholder="Masukkan Tempat Terbit" value="{{ old('tempat_terbit') }}">
                         @error('tempat_terbit')
                             <div class="invalid-feedback">
                                 {{ $message }}

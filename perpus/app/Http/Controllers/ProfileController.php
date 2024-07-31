@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class ProfileController extends Controller
 {
@@ -74,6 +75,10 @@ class ProfileController extends Controller
             $image = $request->file('image')->store('user-profile');
         }
 
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput()->with('error', 'Gagal Update Profile');
+        }
+
         User::where('email', $data->user->email)->update([
             'email' => $request->email,
         ]);
@@ -88,5 +93,43 @@ class ProfileController extends Controller
         ]);
 
         return redirect('/profile')->with('success', 'Profile Berhasil Dirubah');
+    }
+
+    public function changePassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'password' => 'required',
+            'newpassword' => 'required|min:8|same:password_confirm',
+            'password_confirm' => 'required|same:newpassword',
+        ], [
+            'password.required' => 'Password tidak boleh kosong.',
+            'newpassword.required' => 'Password tidak boleh kosong.',
+            'newpassword.min' => 'Password minimal 8 karakter.',
+            'newpassword.same' => 'Konfirmasi password tidak sama.',
+
+            'password_confirm.required' => 'password tidak boleh kosong.',
+            'password_confirm.same' => 'Konfirmasi password tidak sama.',
+        ]);
+
+        $user = Auth()->user();
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('error', 'Password tidak sesuai');
+        }
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('error', 'Gagal ganti password');
+        }
+
+        User::where('email', $user->email)->update([
+            'password' => Hash::make($request->newpassword),
+        ]);
+
+        return redirect('/profile')->with('success', 'Password berhasil dirubah');
     }
 }

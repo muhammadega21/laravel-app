@@ -54,7 +54,7 @@
                                     {{-- modal update --}}
 
                                     <x-modal modalTitle="Update Petugas" modalID="updatePetugas" btn="Update"
-                                        action="" method="POST" enctype="multipart/form-data">
+                                        action="" method="POST" enctype="multipart/form-data" method2="PUT">
 
                                         <div class="row mb-3">
                                             <div class="input-group justify-content-between">
@@ -107,7 +107,7 @@
     </div>
 
     <x-modal modalTitle="Tambah Petugas" modalID="addPetugas" btn="Tambah" action="{{ url('petugas') }}"
-        method="POST" enctype="multipart/form-data">
+        method="POST" enctype="multipart/form-data" method2="POST">
         <div class="row mb-3">
             <div class="input-group justify-content-between">
                 <div class="input-box col-sm-6" style="max-width: 48%">
