@@ -4,16 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\Buku;
 use App\Models\Rak;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+
 
 class BukuController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Gate::allows('admin')) {
+                abort(404);
+            }
+            return $next($request);
+        })->only(['index', 'store', 'update', 'destroy']);
+    }
+
     public function index()
     {
         return view('katalog.buku', [
@@ -26,42 +39,33 @@ class BukuController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
+        if ($request->can)
+            $validator = Validator::make($request->all(), [
+                'judul' => 'required|max:100|unique:bukus,judul',
+                'rak_id' => 'required',
+                'isbn' => 'max:15',
+                'tahun_terbit' => 'max:4',
+                'jumlah' => 'required',
+                'bahasa' => 'max:30',
+            ], [
+                'judul.required' => 'Judul Tidak Boleh Kosong!',
+                'judul.max' => 'Judul Maksimal 100 Karakter!',
+                'judul.unique' => 'Judul Sudah Ada!',
 
+                'rak.required' => 'Rak Tidak Boleh Kosong!',
 
-        $validator = Validator::make($request->all(), [
-            'judul' => 'required|max:100|unique:bukus,judul',
-            'rak_id' => 'required',
-            'isbn' => 'max:15',
-            'tahun_terbit' => 'max:4',
-            'jumlah' => 'required',
-            'bahasa' => 'max:30',
-        ], [
-            'judul.required' => 'Judul Tidak Boleh Kosong!',
-            'judul.max' => 'Judul Maksimal 100 Karakter!',
-            'judul.unique' => 'Judul Sudah Ada!',
+                'isbn.max' => 'Username Maksimal 15 Karakter!',
 
-            'rak.required' => 'Rak Tidak Boleh Kosong!',
+                'tahun_terbit.max' => 'Tahun Terbit Maksimal 4 Karakter!',
 
-            'isbn.max' => 'Username Maksimal 15 Karakter!',
+                'jumlah.required' => 'Jumlah Tidak Boleh Kosong!',
 
-            'tahun_terbit.max' => 'Tahun Terbit Maksimal 4 Karakter!',
-
-            'jumlah.required' => 'Jumlah Tidak Boleh Kosong!',
-
-            'bahasa.max' => 'Bahasa Maksimal 30 Karakter!',
-        ]);
+                'bahasa.max' => 'Bahasa Maksimal 30 Karakter!',
+            ]);
 
         $slug = Str::slug($request->judul);
 
@@ -108,14 +112,6 @@ class BukuController extends Controller
             'page' => 'Detail Buku',
             'buku' => $buku
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**

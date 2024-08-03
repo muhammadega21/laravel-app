@@ -35,6 +35,7 @@ Route::put('petugas/update/{id_petugas}', [PetugasController::class, 'update'])-
 
 // Siswa
 Route::resource('siswa', SiswaController::class)->middleware('auth');
+Route::get('siswa/show/{id_siswa}', [SiswaController::class, 'show'])->middleware('auth');
 Route::get('siswa/delete/{id_siswa}', [SiswaController::class, 'destroy'])->middleware('auth');
 Route::put('siswa/update/{id_siswa}', [SiswaController::class, 'update'])->middleware('auth');
 

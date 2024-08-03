@@ -2,16 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Routing\Controller as BaseController;
 
-abstract class Controller
+abstract class Controller extends BaseController
 {
-    // public function index()
-    // {
-    //     return view('/dashboard', [
-    //         'title' => "Dashboard",
-    //         'main_page' => '',
-    //         'page' => 'Dashboard',
-    //         'data' => 300
-    //     ]);
-    // }
+    use AuthorizesRequests;
 }

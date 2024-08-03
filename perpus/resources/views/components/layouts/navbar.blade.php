@@ -1,10 +1,10 @@
-@if (Auth()->user()->role == 1)
+@if (Auth()->user()->role == 3)
     @php
-        $data = Auth()->user()->petugas;
+        $data = Auth()->user()->siswa;
     @endphp
 @else
     @php
-        $data = Auth()->user()->siswa;
+        $data = Auth()->user()->petugas;
     @endphp
 @endif
 
@@ -118,21 +118,12 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                        <a class="dropdown-item d-flex align-items-center" href="{{ url('profile') }}">
                             <i class="bi bi-person"></i>
                             <span>My Profile</span>
                         </a>
                     </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
 
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                            <i class="bi bi-gear"></i>
-                            <span>Account Settings</span>
-                        </a>
-                    </li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>

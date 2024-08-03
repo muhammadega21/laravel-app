@@ -5,12 +5,14 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between mt-2">
                         <h5 class="card-title">Data Peminjaman</h5>
-                        <div class="btn-action">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#addPeminjaman">
-                                Tambah <span class="fw-semibold">+</span>
-                            </button>
-                        </div>
+                        @canany(['admin', 'petugas'])
+                            <div class="btn-action">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#addPeminjaman">
+                                    Tambah <span class="fw-semibold">+</span>
+                                </button>
+                            </div>
+                        @endcanany
                     </div>
                     <div class="overflow-x-auto">
                         <table class="table datatable">
@@ -23,7 +25,9 @@
                                     <th>Tanggal Pinjam</th>
                                     <th>Tanggal Kembali</th>
                                     <th>Petugas</th>
-                                    <th data-sortable="false">Action</th>
+                                    @canany(['admin', 'petugas'])
+                                        <th data-sortable="false">Action</th>
+                                    @endcanany
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,23 +45,25 @@
                                         <td>
                                             {{ $data->tgl_kembali }}</td>
                                         <td>{{ $data->petugas->name }}</td>
-                                        <td>
-                                            <div class="d-flex gap-1">
-                                                <a href="{{ url('peminjaman/delete/' . $data->id) }}"
-                                                    class="badge border-danger border" onclick="confirm(event)"><i
-                                                        class='bx bxs-trash text-danger'></i></a>
-                                                <button type="button" class="badge bg-light border-warning border"
-                                                    data-bs-toggle="modal" data-bs-target="#updatePeminjaman"
-                                                    data-peminjaman="{{ $data }}">
-                                                    <span class="fw-semibold"><i
-                                                            class="bx bxs-edit text-warning"></i></span>
-                                                </button>
-                                                <a href="{{ url('peminjaman/kembali/' . $data->id_pinjam) }}"
-                                                    class="badge {{ !$data->status ? 'border-primary' : 'border-success' }} border"
-                                                    @if (!$data->status) onclick="confirmKembali(event)" @else onclick="confirmComplete(event)" @endif><i
-                                                        class='{{ !$data->status ? 'bx bx-repeat text-primary' : 'bx bx-check text-success' }}  fw-semibold'></i></a>
-                                            </div>
-                                        </td>
+                                        @canany(['admin', 'petugas'])
+                                            <td>
+                                                <div class="d-flex gap-1">
+                                                    <a href="{{ url('peminjaman/delete/' . $data->id) }}"
+                                                        class="badge border-danger border" onclick="confirm(event)"><i
+                                                            class='bx bxs-trash text-danger'></i></a>
+                                                    <button type="button" class="badge bg-light border-warning border"
+                                                        data-bs-toggle="modal" data-bs-target="#updatePeminjaman"
+                                                        data-peminjaman="{{ $data }}">
+                                                        <span class="fw-semibold"><i
+                                                                class="bx bxs-edit text-warning"></i></span>
+                                                    </button>
+                                                    <a href="{{ url('peminjaman/kembali/' . $data->id_pinjam) }}"
+                                                        class="badge {{ !$data->status ? 'border-primary' : 'border-success' }} border"
+                                                        @if (!$data->status) onclick="confirmKembali(event)" @else onclick="confirmComplete(event)" @endif><i
+                                                            class='{{ !$data->status ? 'bx bx-repeat text-primary' : 'bx bx-check text-success' }}  fw-semibold'></i></a>
+                                                </div>
+                                            </td>
+                                        @endcanany
                                     </tr>
 
 
@@ -117,34 +123,35 @@
         </div>
     </div>
 
+    @canany(['admin', 'petugas'])
+        {{-- Select data buku --}}
+        <script>
+            $(document).ready(function() {
+                let dataBuku = @json($buku);
+                let bukuSelect = $("#buku_id");
 
-    {{-- Select data buku --}}
-    <script>
-        $(document).ready(function() {
-            let dataBuku = @json($buku);
-            let bukuSelect = $("#buku_id");
+                $.each(dataBuku, function(index, buku) {
+                    bukuSelect.append("<option value='" + buku.id + "'>" + buku.judul + "</option>");
+                });
 
-            $.each(dataBuku, function(index, buku) {
-                bukuSelect.append("<option value='" + buku.id + "'>" + buku.judul + "</option>");
             });
+        </script>
+        {{-- Select data buku --}}
 
-        });
-    </script>
-    {{-- Select data buku --}}
+        {{-- Select data siswa --}}
+        <script>
+            $(document).ready(function() {
+                let dataSiswa = @json($siswa);
+                let siswaSelect = $("#siswa_id");
 
-    {{-- Select data siswa --}}
-    <script>
-        $(document).ready(function() {
-            let dataSiswa = @json($siswa);
-            let siswaSelect = $("#siswa_id");
+                $.each(dataSiswa, function(index, siswa) {
+                    siswaSelect.append("<option value='" + siswa.id + "'>" + siswa.name + "</option>");
+                });
 
-            $.each(dataSiswa, function(index, siswa) {
-                siswaSelect.append("<option value='" + siswa.id + "'>" + siswa.name + "</option>");
             });
-
-        });
-    </script>
-    {{-- Select data siswa --}}
+        </script>
+        {{-- Select data siswa --}}
+    @endcanany
 
     {{-- Modal Tambah Peminjaman --}}
 

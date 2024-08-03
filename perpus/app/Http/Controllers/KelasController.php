@@ -4,10 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Kelas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
+
 
 class KelasController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Gate::allows('admin')) {
+                abort(404);
+            }
+            return $next($request);
+        })->only(['index', 'store', 'update', 'destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -19,14 +32,6 @@ class KelasController extends Controller
             'page' => 'Kelas',
             'datas' => Kelas::all(),
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -55,22 +60,6 @@ class KelasController extends Controller
         ]);
 
         return redirect('/kelas')->with('success', 'Berhasil Menambah Kelas');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**

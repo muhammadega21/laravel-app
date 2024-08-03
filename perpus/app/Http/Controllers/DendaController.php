@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Denda;
 use App\Models\Pengembalian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class DendaController extends Controller
@@ -12,23 +13,31 @@ class DendaController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Gate::allows('admin')) {
+                abort(404);
+            }
+            return $next($request);
+        })->only(['store', 'update', 'destroy', 'bayar_denda']);
+    }
+
     public function index()
     {
+        if (Auth()->user()->role == 3) {
+            $data = Denda::where('siswa_id', Auth()->user()->siswa->id)->get();
+        } else {
+            $data = Denda::all();
+        }
         return view('denda', [
             'title' => "Data Denda",
             'main_page' => '',
             'page' => 'Data Denda',
-            'datas' => Denda::all(),
+            'datas' => $data,
             'pengembalian' => Pengembalian::all(),
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -73,22 +82,6 @@ class DendaController extends Controller
         ]);
 
         return redirect('/denda')->with('success', 'Berhasil menambah Denda');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**

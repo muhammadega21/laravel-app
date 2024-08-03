@@ -7,34 +7,42 @@ use App\Models\Denda;
 use App\Models\Peminjaman;
 use App\Models\Pengembalian;
 use App\Models\Siswa;
-use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
+
 
 class PeminjamanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Gate::allows('admin')) {
+                abort(404);
+            }
+            return $next($request);
+        })->only(['store', 'update', 'destroy', 'pengembalian']);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        if (Auth()->user()->role == 3) {
+            $data = Peminjaman::where('siswa_id', Auth()->user()->siswa->id)->get();
+        } else {
+            $data = Peminjaman::all();
+        }
         return view('peminjaman', [
             'title' => "Data Peminjaman",
             'main_page' => '',
             'page' => 'Data Peminjaman',
-            'datas' => Peminjaman::all(),
+            'datas' => $data,
             'siswa' => Siswa::all(),
             'buku' => Buku::all()
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -77,22 +85,6 @@ class PeminjamanController extends Controller
         ]);
 
         return redirect('/peminjaman')->with('success', 'Berhasil menambah Peminjaman');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**

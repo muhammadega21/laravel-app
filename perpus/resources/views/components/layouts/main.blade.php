@@ -91,7 +91,9 @@
 
     <!-- My JS File -->
     <script src="{{ asset('js/script.js') }}"></script>
-
+    @canany(['admin', 'petugas'])
+        <script src="{{ asset('js/admin.js') }}"></script>
+    @endcanany
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 
 </body>

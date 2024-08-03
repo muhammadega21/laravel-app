@@ -6,10 +6,22 @@ use App\Models\Kelas;
 use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
+
+
 
 class SiswaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Gate::allows('admin')) {
+                abort(404);
+            }
+            return $next($request);
+        })->only(['index', 'store', 'show', 'update', 'destroy']);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -22,14 +34,6 @@ class SiswaController extends Controller
             'datas' => Siswa::all(),
             'kelas' => Kelas::all()
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -94,17 +98,15 @@ class SiswaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Siswa $siswa)
+    public function show($id_siswa)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Siswa $siswa)
-    {
-        //
+        $siswa = Siswa::where('id_siswa', $id_siswa)->first();
+        return view('master-data.siswa_show', [
+            'title' => "Detail Siswa",
+            'main_page' => 'Master',
+            'page' => 'Detail Siswa',
+            'data' => $siswa,
+        ]);
     }
 
     /**

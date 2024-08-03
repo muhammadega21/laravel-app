@@ -164,19 +164,21 @@
         </div>
     </div>
 
-    {{-- Select data rak --}}
-    <script>
-        $(document).ready(function() {
-            let rakData =
-                @json($rak);
-            let rakSelect = $("#rak_id");
+    @canany(['admin', 'petugas'])
+        {{-- Select data rak --}}
+        <script>
+            $(document).ready(function() {
+                let rakData =
+                    @json($rak);
+                let rakSelect = $("#rak_id");
 
-            $.each(rakData, function(index, rak) {
-                rakSelect.append("<option value='" + rak.id + "'>" + rak.nama_rak + "</option>");
+                $.each(rakData, function(index, rak) {
+                    rakSelect.append("<option value='" + rak.id + "'>" + rak.nama_rak + "</option>");
+                });
             });
-        });
-    </script>
-    {{-- Select data rak --}}
+        </script>
+        {{-- Select data rak --}}
+    @endcanany
 
     {{-- Modal Tambah Buku --}}
     <x-modal modalTitle="Tambah Buku" modalID="addBuku" btn="Tambah" action="{{ url('buku') }}" method="POST"

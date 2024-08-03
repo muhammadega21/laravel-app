@@ -63,6 +63,12 @@
                                 <div class="col-lg-9 col-md-8">:
                                     {{ $data->user->role == 1 ? $data->id_petugas : $data->id_siswa }}</div>
                             </div>
+                            @if ($data->user->role == 3)
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label fw-semibold">Kelas</div>
+                                    <div class="col-lg-9 col-md-8">: {{ $data->kelas->nama_kelas }}</div>
+                                </div>
+                            @endif
 
                             @if ($data->user->role == 2)
                                 <div class="row">

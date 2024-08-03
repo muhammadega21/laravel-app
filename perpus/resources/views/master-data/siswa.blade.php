@@ -34,6 +34,9 @@
                                         <td class="text-nowrap">{{ $data->kelas->nama_kelas }}</td>
                                         <td class="text-nowrap">
                                             <div class="d-flex gap-1">
+                                                <a href="{{ url('siswa/show/' . $data->id_siswa) }}"
+                                                    class="badge border-primary border"><i
+                                                        class='bx bxs-show text-primary'></i></a>
                                                 <a href="{{ url('siswa/delete/' . $data->id_siswa) }}"
                                                     class="badge border-danger border" onclick="confirm(event)"><i
                                                         class='bx bxs-trash text-danger'></i></a>

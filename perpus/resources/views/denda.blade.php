@@ -6,10 +6,12 @@
                     <div class="d-flex align-items-center justify-content-between mt-2">
                         <h5 class="card-title">Data Denda</h5>
                         <div class="btn-action">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#addDenda">
-                                Tambah <span class="fw-semibold">+</span>
-                            </button>
+                            @canany(['admin', 'petugas'])
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#addDenda">
+                                    Tambah <span class="fw-semibold">+</span>
+                                </button>
+                            @endcanany
                         </div>
                     </div>
                     <div class="overflow-x-auto">
@@ -24,7 +26,9 @@
                                     <th class="text-nowrap">Denda</th>
                                     <th class="text-nowrap">Biaya Denda</th>
                                     <th class="text-nowrap">Status</th>
-                                    <th data-sortable="false">Action</th>
+                                    @canany(['admin', 'petugas'])
+                                        <th data-sortable="false">Action</th>
+                                    @endcanany
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,23 +45,25 @@
                                         <td>Rp {{ number_format($data->biaya_denda, 2, ',', '.') }}</td>
                                         <td class="{{ !$data->status ? 'text-danger' : 'text-success' }}">
                                             {{ !$data->status ? 'Belum Bayar' : 'Lunas' }}</td>
-                                        <td>
-                                            <div class="d-flex gap-1">
-                                                <a href="{{ url('denda/delete/' . $data->id_denda) }}"
-                                                    class="badge border-danger border" onclick="confirm(event)"><i
-                                                        class='bx bxs-trash text-danger'></i></a>
-                                                <button type="button" class="badge bg-light border-warning border"
-                                                    data-bs-toggle="modal" data-bs-target="#updateDenda"
-                                                    data-denda="{{ $data }}">
-                                                    <span class="fw-semibold"><i
-                                                            class="bx bxs-edit text-warning"></i></span>
-                                                </button>
-                                                <a href="{{ url('denda/bayar/' . $data->id_denda) }}"
-                                                    class="badge border-success border"
-                                                    @if (!$data->status) onclick="confirmBayar(event)" @else onclick="dendaComplete(event)" @endif><i
-                                                        class='bx bx-dollar text-success'></i></a>
-                                            </div>
-                                        </td>
+                                        @canany(['admin', 'petugas'])
+                                            <td>
+                                                <div class="d-flex gap-1">
+                                                    <a href="{{ url('denda/delete/' . $data->id_denda) }}"
+                                                        class="badge border-danger border" onclick="confirm(event)"><i
+                                                            class='bx bxs-trash text-danger'></i></a>
+                                                    <button type="button" class="badge bg-light border-warning border"
+                                                        data-bs-toggle="modal" data-bs-target="#updateDenda"
+                                                        data-denda="{{ $data }}">
+                                                        <span class="fw-semibold"><i
+                                                                class="bx bxs-edit text-warning"></i></span>
+                                                    </button>
+                                                    <a href="{{ url('denda/bayar/' . $data->id_denda) }}"
+                                                        class="badge border-success border"
+                                                        @if (!$data->status) onclick="confirmBayar(event)" @else onclick="dendaComplete(event)" @endif><i
+                                                            class='bx bx-dollar text-success'></i></a>
+                                                </div>
+                                            </td>
+                                        @endcanany
                                     </tr>
 
 

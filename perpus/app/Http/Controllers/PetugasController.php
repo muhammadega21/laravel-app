@@ -5,11 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Petugas;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Validator as ValidationValidator;
 
 class PetugasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Gate::allows('bigAdmin')) {
+                abort(404);
+            }
+            return $next($request);
+        })->only(['index', 'store', 'update', 'destroy']);
+    }
     /**
      * Display a listing of the resource.
      */
