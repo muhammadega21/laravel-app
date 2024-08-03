@@ -121,8 +121,9 @@
                                             <input type="file"
                                                 class="form-control @error('image') is-invalid @enderror" hidden
                                                 name="image" id="inputImage" onchange="previewImage()">
-                                            <a href="#" class="btn btn-danger btn-sm"
-                                                title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                                            <a href="{{ url('profile/delete-image') }}" class="btn btn-danger btn-sm"
+                                                title="Remove my profile image" onclick="confirmDeleteImage(event)"><i
+                                                    class="bi bi-trash"></i></a>
                                             @error('image')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}

@@ -1,3 +1,21 @@
+// Confirm Delete Image
+function confirmDeleteImage(e) {
+    e.preventDefault();
+    const url = e.currentTarget.getAttribute("href");
+
+    swal({
+        title: "Anda Yakin?",
+        text: "Foto profil akan kembali ke gambar default",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((cancel) => {
+        if (cancel) {
+            window.location.href = url;
+        }
+    });
+}
+
 // Book Cover
 $(document).ready(function () {
     const bookCoverImg = $(".cover");

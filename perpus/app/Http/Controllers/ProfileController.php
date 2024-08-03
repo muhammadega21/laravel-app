@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Petugas;
+use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -131,5 +133,30 @@ class ProfileController extends Controller
         ]);
 
         return redirect('/profile')->with('success', 'Password berhasil dirubah');
+    }
+
+    public function deleteImage()
+    {
+        $user = Auth()->user();
+        if ($user->role == 3) {
+            if ($user->siswa->image) {
+                Storage::delete($user->siswa->image);
+                Siswa::where('id_siswa', $user->siswa->id_siswa)->update([
+                    'image' => null,
+                ]);
+            } else {
+                return redirect('/profile')->with('error', 'Anda menggunakan gambar default');
+            }
+        } else {
+            if ($user->petugas->image) {
+                Storage::delete($user->petugas->image);
+                Petugas::where('id_petugas', $user->petugas->id_petugas)->update([
+                    'image' => null,
+                ]);
+            } else {
+                return redirect('/profile')->with('error', 'Anda menggunakan gambar default');
+            }
+        }
+        return redirect('/profile')->with('success', 'Profile Berhasil Dirubah');
     }
 }

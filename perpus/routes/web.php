@@ -78,4 +78,5 @@ Route::controller(ProfileController::class)->group(function () {
     Route::get('/profile', 'index')->middleware('auth');
     Route::put('/profile/update', 'update')->middleware('auth');
     Route::put('/profile/change_password', 'changePassword')->middleware('auth');
+    Route::get('/profile/delete-image', 'deleteImage')->middleware('auth');
 });
